@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header h1{
+    font-family: Montserrat, sans-serif;
+    font-size: 70px;
+}
+
+#inp_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#switch{
+    border: none;
+    background-color: inherit;
+
+}
