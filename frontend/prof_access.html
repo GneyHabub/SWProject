@@ -13,8 +13,10 @@
     </header>
     <div id="inp_box">
         <input type="text" placeholder="username">
-        <input type="password" placeholder="password" v-model="password">
-        <button type="submit" v-show="password">Login</button>
+        <input type="password" placeholder="password">
+        <input type="text" placeholder="survey id" id="poll_id" display="none">
+        <button type="submit">Login</button>
+        <button id="switch">I'm a student</button>
     </div>
     <script src="index.js"></script>
 </body>
