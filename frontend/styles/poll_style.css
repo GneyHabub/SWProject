@@ -33,7 +33,7 @@
 .poll_title {
   background-color: #BBEAF4;
   margin: 30px 0px;
-  padding: 35px 150px;
+  padding: 35px 12%;
   box-shadow: 5px 5px 5px darkgray;
 }
 .poll_title .poll_name {
@@ -44,9 +44,24 @@
   margin: 0px;
   font-size: 17px;
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .poll_title .poll_subtitle {
+    font-size: 8px;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .poll_title {
+    font-size: 10px;
+  }
+}
 
 .question_block {
-  margin: 35px 150px;
+  margin: 35px 12%;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .question_block {
+    margin: 35px 8%;
+  }
 }
 
 .question_statement {
@@ -78,14 +93,25 @@
   height: 40px;
   width: 40px;
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .mchoice_option input {
+    height: 20px;
+    width: 20px;
+  }
+}
 .mchoice_option label {
   font-size: 20px;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .mchoice_option label {
+    font-size: 30px;
+  }
 }
 
 .small_text_option {
   margin: 0 60px;
   height: 40px;
-  width: 500px;
+  width: 40%;
   font-size: 16px;
 }
 

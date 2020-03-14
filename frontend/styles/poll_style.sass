@@ -34,7 +34,7 @@ $default_shadow: 5px 5px 5px darkgray
 .poll_title
   background-color: $main_blue
   margin: 30px 0px
-  padding: 35px 150px
+  padding: 35px 12%
   box-shadow: $default_shadow
   .poll_name
     color: $main_purple
@@ -42,9 +42,15 @@ $default_shadow: 5px 5px 5px darkgray
   .poll_subtitle
     margin: 0px
     font-size: 17px
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)
+      font-size: 8px
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)
+    font-size: 10px
 
 .question_block
-  margin: 35px 150px
+  margin: 35px 12%
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)
+    margin: 35px 8%
 
 .question_statement
   color: $main_purple
@@ -68,13 +74,18 @@ $default_shadow: 5px 5px 5px darkgray
   input
     height: 40px
     width: 40px
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)
+      height: 20px
+      width: 20px
   label
     font-size: 20px
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)
+      font-size: 30px
 
 .small_text_option
   margin: 0 60px
   height: 40px
-  width: 500px
+  width: 40%
   font-size: 16px
 
 .submit_button
