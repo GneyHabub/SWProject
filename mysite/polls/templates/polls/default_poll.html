@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     {% load static %}
+     <meta charset="UTF-8">
+     <title>Poll</title>
+     <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+     <link rel="stylesheet" href="{% static 'polls/poll_style.css' %}">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+     <link rel="icon" href="images/inno_logo.png">
+ </head>
+ <body>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+     <header>
+         <div class="green_stripe">
+             <h3><a href="https://random.dog/">Log out</a></h3>
+         </div>
+         <div class="white_stripe">
+             <h1 class="survey_number">Survey #01</h1>
+             <img src="http://placecorgi.com/260/180" alt="Corgi">
+         </div>
+     </header>
+     <div class="poll_title">
+         <h1 class="poll_name">{{poll.poll_name}}</h1>
+         <p class="poll_subtitle">Please fill out this form to help us improve the course. Trolling encouraged. </p>
+     </div>
+    <form action="{% url 'polls:vote' poll.id %}" method="post">{% csrf_token %}
+        <div class="question_block">
+             {% for question in poll.question_set.all %}
+             <div class="question">
+                 <h1 class="question_statement">{{question.question_text}}</h1>
+                 {% if question.type == 0 %}
+                 <div class="radio_option">
+                     <h3>Not Much</h3>
+                     {% for choice in question.choice_set.all %}
+                             <div>
+                                 <input type="radio" name="{{question.id}}" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                             </div>
+                     {% endfor %}
+                     <h3>Very Much</h3>
+                 </div>
+                 {% elif question.type == 1 %}
+                    <div class="mchoice_option">
+                    {% for choice in question.choice_set.all %}
+                        <div>
+                            <input type="checkbox" name="{{question.id}}" id="choice.{{ forloop.counter }}" value="{{ choice.id }}">
+                            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                        </div>
+                    {% endfor %}
+                     </div>
+                 {% else %}
+                     <input type="text" class="small_text_option" placeholder="Print your fidback here" name="{{question.id}}" id="{{question.id}}">
+                 {% endif %}
+             </div>
+             {% endfor %}
+         </div>
+         <div class="submit_button">
+              <button type="submit" id="submit_default_survey">SUBMIT ANSWERS</button>
+         </div>
+     </form>
+     <footer>
+         <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2020</div>
+     </footer>
+ </body>
+ </html>
