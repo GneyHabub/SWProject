@@ -1,9 +1,4 @@
-*{
-    box-sizing: border-box;
-}
-
 body{
-    background-color: #F1FAFC;
     display: flex;
     align-items: center;
     flex-direction: column;
