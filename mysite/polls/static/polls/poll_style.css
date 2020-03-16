@@ -1,114 +1,144 @@
+header {
+    width: 100%;
+}
+
 .green_stripe {
-   background-color: #4EA952;
-   padding: 10px 40px;
- }
- .green_stripe h3 {
-   font-size: 17px;
-   text-align: right;
-   margin: 4px;
- }
- .green_stripe h3 a {
-   color: #0D3911;
- }
+    background-color: #4EA952;
+    padding: 10px 40px;
+}
+.green_stripe h3 {
+    font-size: 17px;
+    text-align: right;
+    margin: 4px;
+}
+.green_stripe h3 a {
+    color: #0D3911;
+}
 
- .white_stripe {
-   background-color: white;
-   padding: 10px 40px;
-   box-shadow: 5px 5px 5px darkgray;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   flex-direction: row;
- }
- .white_stripe img {
-   border-radius: 50%;
-   height: 55px;
-   width: 55px;
- }
- .white_stripe .survey_number {
-   font-size: 15px;
-   color: #727272;
- }
+.white_stripe {
+    background-color: white;
+    padding: 10px 40px;
+    box-shadow: 5px 5px 5px darkgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+.white_stripe img {
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+}
+.white_stripe .survey_number {
+    font-size: 15px;
+    color: #727272;
+}
 
- .poll_title {
-   background-color: #BBEAF4;
-   margin: 30px 0px;
-   padding: 35px 150px;
-   box-shadow: 5px 5px 5px darkgray;
- }
- .poll_title .poll_name {
-   color: #9C27B0;
-   margin: 0px;
- }
- .poll_title .poll_subtitle {
-   margin: 0px;
-   font-size: 17px;
- }
+.poll_title {
+    background-color: #BBEAF4;
+    margin: 30px 0px;
+    padding: 35px 12%;
+    box-shadow: 5px 5px 5px darkgray;
+}
+.poll_title .poll_name {
+    color: #9C27B0;
+    margin: 0px;
+}
+.poll_title .poll_subtitle {
+    margin: 0px;
+    font-size: 17px;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .poll_title .poll_subtitle {
+        font-size: 8px;
+    }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .poll_title {
+        font-size: 10px;
+    }
+}
 
- .question_block {
-   margin: 35px 150px;
- }
+.question_block {
+    margin: 35px 12%;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .question_block {
+        margin: 35px 8%;
+    }
+}
 
- .question_statement {
-   color: #9C27B0;
- }
+.question_statement {
+    color: #9C27B0;
+}
 
- .question {
-   margin: 60px 0;
- }
+.question {
+    margin: 60px 0;
+}
 
- .radio_option {
-   display: flex;
-   align-items: center;
-   justify-content: space-around;
-   padding: 10px 60px;
- }
- .radio_option h3 {
-   font-size: 20px;
- }
+.radio_option {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 60px;
+}
+.radio_option h3 {
+    font-size: 20px;
+}
 
- .mchoice_option {
-   padding: 10px 60px;
- }
- .mchoice_option div {
-   display: flex;
-   align-items: center;
- }
- .mchoice_option input {
-   height: 40px;
-   width: 40px;
- }
- .mchoice_option label {
-   font-size: 20px;
- }
+.mchoice_option {
+    padding: 10px 60px;
+}
+.mchoice_option div {
+    display: flex;
+    align-items: center;
+}
+.mchoice_option input {
+    height: 40px;
+    width: 40px;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .mchoice_option input {
+        height: 20px;
+        width: 20px;
+    }
+}
+.mchoice_option label {
+    font-size: 20px;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .mchoice_option label {
+        font-size: 30px;
+    }
+}
 
- .small_text_option {
-   margin: 0 60px;
-   height: 40px;
-   width: 500px;
-   font-size: 16px;
- }
+.small_text_option {
+    margin: 0 60px;
+    height: 40px;
+    width: 40%;
+    font-size: 16px;
+}
 
- .submit_button {
-   display: flex;
-   align-items: center;
-   justify-content: center;
- }
+.submit_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
- button {
-   height: 50px;
-   width: 250px;
-   font-size: 20px;
-   border-radius: 5px;
- }
+button {
+    height: 50px;
+    width: 250px;
+    font-size: 20px;
+    border-radius: 5px;
+}
 
- footer {
-   height: 100px;
-   display: flex;
-   align-items: flex-end;
-   justify-content: flex-end;
-   padding: 10px;
- }
- footer div {
-   color: #727272;
- }
+footer {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 10px;
+}
+footer div {
+    color: #727272;
+}
