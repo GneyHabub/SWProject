@@ -1,3 +1,7 @@
+header {
+  width: 100%;
+}
+
 .green_stripe {
   background-color: #4EA952;
   padding: 10px 40px;
