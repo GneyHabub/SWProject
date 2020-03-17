@@ -6,6 +6,7 @@
      <title>Poll</title>
      <link rel="stylesheet" href="{% static 'polls/style.css' %}">
      <link rel="stylesheet" href="{% static 'polls/poll_style.css' %}">
+     <link rel="stylesheet" href="{% static 'polls/poll_style_mobile.css' %}">
      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
      <link rel="icon" href="images/inno_logo.png">
  </head>
@@ -31,14 +32,12 @@
                  <h1 class="question_statement">{{question.question_text}}</h1>
                  {% if question.type == 0 %}
                  <div class="radio_option">
-                     <h3>Not Much</h3>
                      {% for choice in question.choice_set.all %}
                              <div>
                                  <input type="radio" name="{{question.id}}" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                                  <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
                              </div>
                      {% endfor %}
-                     <h3>Very Much</h3>
                  </div>
                  {% elif question.type == 1 %}
                     <div class="mchoice_option">
@@ -50,7 +49,7 @@
                     {% endfor %}
                      </div>
                  {% else %}
-                     <input type="text" class="small_text_option" placeholder="Print your fidback here" name="{{question.id}}" id="{{question.id}}">
+                     <input type="text" class="small_text_option" placeholder="Print your feedback here" name="{{question.id}}" id="{{question.id}}">
                  {% endif %}
              </div>
              {% endfor %}
