@@ -6,9 +6,12 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
 body{
     background-color: #F1FAFC;
-    font-family: "Montserrat", serif;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: normal;
 }
 
 button{

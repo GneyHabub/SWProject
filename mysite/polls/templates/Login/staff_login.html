@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="icon" href="images/inno_logo.png">
-    <script src="vue.min.js"></script>
+    <link rel="icon" href="../../static/polls/images/inno_logo.png">
+    <link rel="stylesheet" href="../../static/login/login_styles.css">
+    <link rel="stylesheet" href="../../static/style.css">
+    <link rel="stylesheet" href="../../static/login/login_styles_mobile.css">
 </head>
 <body>
     <header>
@@ -15,10 +16,8 @@
     <div id="inp_box">
         <input type="text" placeholder="username" id="username">
         <input type="password" placeholder="password" id="password">
-        <input type="text" placeholder="survey id" id="survey_id">
         <button type="submit">Login</button>
-        <button id="switch">I'm a student</button>
+        <a href="student_login.html" id="switch">I'm a student</a>
     </div>
-    <script src="index.js"></script>
 </body>
 </html>
