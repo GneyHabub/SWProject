@@ -1,5 +1,5 @@
 .main_body {
-  height: calc(100vh - 50px);
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: auto;
@@ -13,6 +13,9 @@ nav {
   justify-content: flex-start;
   align-items: center;
   box-shadow: 5px 5px 5px darkgray;
+  height: 100vh;
+  width: 250px;
+  left: 0;
 }
 nav button {
   height: 7%;
@@ -37,6 +40,15 @@ nav .icon_and_name .icon_image {
   width: 80%;
   height: 70%;
   justify-self: center;
+}
+
+.on_scroll {
+  position: fixed;
+  top: 0;
+}
+
+.main_body_on_scroll {
+  margin-left: 360px;
 }
 
 /*# sourceMappingURL=home_page_styles.css.map */

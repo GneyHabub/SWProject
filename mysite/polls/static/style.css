@@ -34,10 +34,14 @@ button:hover {
 .green_stripe {
     background-color: #4EA952;
     padding: 10px 40px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .green_stripe h3 {
+    align-self: flex-end;
     font-size: 17px;
-    text-align: right;
     margin: 4px;
 }
 .green_stripe h3 a {
