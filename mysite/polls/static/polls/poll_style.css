@@ -2,19 +2,6 @@ header {
   width: 100%;
 }
 
-.green_stripe {
-  background-color: #4EA952;
-  padding: 10px 40px;
-}
-.green_stripe h3 {
-  font-size: 17px;
-  text-align: right;
-  margin: 4px;
-}
-.green_stripe h3 a {
-  color: #0D3911;
-}
-
 .white_stripe {
   background-color: white;
   padding: 10px 40px;
@@ -23,11 +10,6 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-}
-.white_stripe img {
-  border-radius: 50%;
-  height: 55px;
-  width: 55px;
 }
 .white_stripe .survey_number {
   font-size: 15px;

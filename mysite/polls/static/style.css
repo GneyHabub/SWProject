@@ -5,6 +5,7 @@
 html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 body{
@@ -28,4 +29,23 @@ button{
 
 button:hover {
     background-color: #3a833a;
+}
+
+.green_stripe {
+    background-color: #4EA952;
+    padding: 10px 40px;
+}
+.green_stripe h3 {
+    font-size: 17px;
+    text-align: right;
+    margin: 4px;
+}
+.green_stripe h3 a {
+    color: #0D3911;
+}
+
+.icon_image{
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
 }

@@ -1,0 +1,42 @@
+$main_green: #4EA952
+$main_blue: #BBEAF4
+$main_purple: #9C27B0
+$link_color: #0D3911
+$font: 'Montserrat', serif
+$subtle_gray: #727272
+$default_shadow: 5px 5px 5px darkgray
+
+.main_body
+  height: calc(100vh - 50px)
+  display: grid
+  grid-template-columns: 1fr 4fr
+  grid-template-rows: auto
+  align-items: stretch
+
+nav
+  background-color: white
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  box-shadow: $default_shadow
+  button
+    height: 7%
+    width: 80%
+  .icon_and_name
+    margin: 20px
+
+    display: grid
+    grid-template-columns: 1fr 2fr
+    justify-items: center
+    align-items: center
+    h2
+      font-size: 15px
+    .icon_image
+      height: 70px
+      width: 70px
+
+.default_ranking
+  width: 80%
+  height: 70%
+  justify-self: center

@@ -1,0 +1,42 @@
+.main_body {
+  height: calc(100vh - 50px);
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto;
+  align-items: stretch;
+}
+
+nav {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 5px 5px 5px darkgray;
+}
+nav button {
+  height: 7%;
+  width: 80%;
+}
+nav .icon_and_name {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-items: center;
+  align-items: center;
+}
+nav .icon_and_name h2 {
+  font-size: 15px;
+}
+nav .icon_and_name .icon_image {
+  height: 70px;
+  width: 70px;
+}
+
+.default_ranking {
+  width: 80%;
+  height: 70%;
+  justify-self: center;
+}
+
+/*# sourceMappingURL=home_page_styles.css.map */

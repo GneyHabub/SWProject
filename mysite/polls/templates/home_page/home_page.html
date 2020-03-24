@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style.css">
+    <link rel="stylesheet" href="../../static/home_page/home_page_styles.css">
+    <link rel="stylesheet" href="../../static/home_page/home_page_styles_mobile.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    <header>
+        <div class="green_stripe">
+            <h3><a href="https://random.dog/">Log out</a></h3>
+        </div>
+    </header>
+    <div class="main_body">
+        <nav>
+            <div class="icon_and_name">
+                <img src="https://i.pinimg.com/originals/b0/26/c7/b026c7f98aa6de974e9698e08c32e6cf.png" alt="Corgi" class="icon_image">
+                <h2>Vladimir Putin</h2>
+            </div>
+            <button id="to_courses">Courses</button>
+            <button id="to_analytics">Analytics</button>
+            <button id="to_surveys">Surveys</button>
+            <button id="to_constructor">Create new survey</button>
+        </nav>
+        <div class="default_ranking">
+            <canvas id="myChart"></canvas>
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>

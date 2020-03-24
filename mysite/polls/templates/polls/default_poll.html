@@ -4,11 +4,11 @@
      {% load static %}
      <meta charset="UTF-8">
      <title>Poll</title>
-     <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'style.css' %}">
      <link rel="stylesheet" href="{% static 'polls/poll_style.css' %}">
      <link rel="stylesheet" href="{% static 'polls/poll_style_mobile.css' %}">
-     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-     <link rel="icon" href="images/inno_logo.png">
+     <link rel="icon" href="../../static/polls/images/inno_logo.png">
  </head>
  <body>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -18,7 +18,7 @@
         </div>
         <div class="white_stripe">
             <h1 class="survey_number">Survey #01</h1>
-            <img src="http://placecorgi.com/260/180" alt="Corgi">
+            <img src="http://placecorgi.com/260/180" alt="Corgi" class="icon_image">
         </div>
     </header>
      <div class="poll_title">
