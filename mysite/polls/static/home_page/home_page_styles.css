@@ -1,30 +1,35 @@
 .main_body {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   align-items: stretch;
 }
 
 nav {
+  display: none;
   background-color: white;
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   box-shadow: 5px 5px 5px darkgray;
   height: 100vh;
-  width: 250px;
+  width: 17vw;
   left: 0;
 }
 nav button {
-  height: 7%;
+  height: 60px;
   width: 80%;
+}
+@media (max-width: 850px) {
+  nav button {
+    font-size: 14px;
+  }
 }
 nav .icon_and_name {
   margin: 20px;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
   justify-items: center;
   align-items: center;
 }
@@ -49,6 +54,31 @@ nav .icon_and_name .icon_image {
 
 .main_body_on_scroll {
   margin-left: 360px;
+}
+
+@media (max-width: 850px) {
+  .green_stripe {
+    height: 40px;
+  }
+}
+.green_stripe button {
+  background-color: inherit;
+  height: 50px;
+  width: 50px;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 850px) {
+  .green_stripe button {
+    height: 30px;
+    width: 30px;
+  }
+}
+@media (max-width: 850px) {
+  .green_stripe button img {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 /*# sourceMappingURL=home_page_styles.css.map */

@@ -12,6 +12,7 @@
 <body>
     <header>
         <div class="green_stripe">
+            <button id="sidebar"><img src="../../static/home_page/images/sidebar.png" height="50" width="50"/></button>
             <h3><a href="https://random.dog/">Log out</a></h3>
         </div>
     </header>
@@ -59,7 +60,7 @@
                     }
                 });
                 var ctx1 = document.getElementById('myChart1').getContext('2d');
-                var myChart1 = new Chart(ctx1, {
+                var myChart1 = new Chart(ctx1 , {
                     type: 'line',
                     data: {
                         labels: ['1', '2', '3', '4', '5', '6', '7'],
@@ -90,18 +91,32 @@
         </div>
     </div>
     <script>
-        window.onscroll = function() {myFunction()};
-        let sidebar = document.getElementById("nav");
-        let main_body = document.getElementsByClassName("default_ranking")[0];
-        function myFunction() {
-            if (window.pageYOffset > 70) {
-                sidebar.classList.add("on_scroll");
-                main_body.classList.add("main_body_on_scroll");
+
+        let sidebar_flag = false;
+        document.getElementById("sidebar").addEventListener("click", function () {
+            if (!sidebar_flag){
+                document.getElementById("nav").style.display = "flex";
+                sidebar_flag = true;
+                document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr 4fr";
+                window.onscroll = function() {myFunction()};
+                let sidebar = document.getElementById("nav");
+                let main_body = document.getElementsByClassName("default_ranking")[0];
+                function myFunction() {
+                    if (window.pageYOffset > 70) {
+                        sidebar.classList.add("on_scroll");
+                        main_body.classList.add("main_body_on_scroll");
+                    } else {
+                        sidebar.classList.remove("on_scroll");
+                        main_body.classList.remove("main_body_on_scroll");
+                    }
+                }
             } else {
-                sidebar.classList.remove("on_scroll");
-                main_body.classList.remove("main_body_on_scroll");
+                document.getElementById("nav").style.display = "none";
+                sidebar_flag = false;
+                document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr";
+                window.onscroll = null;
             }
-        }
+        });
     </script>
 </body>
 </html>
