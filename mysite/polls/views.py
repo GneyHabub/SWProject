@@ -8,14 +8,75 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question, Poll
+from .forms import CustomUserCreationForm
+from .models import Choice, Question, Poll, CustomUser
+
+from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login
+from .forms import StaffLoginForm, StudentLoginForm
+
+
+def staff_login(request):
+    if request.method == 'POST':
+        form = StaffLoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(email=cd['email'], password=cd['password'])
+            if user is not None:
+                if user.is_student:
+                    return HttpResponse('Unavailable for students ')
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('polls:personal_page', args=(user.id,)))
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = StaffLoginForm()
+    return render(request, 'Login/staff_form_login.html', {'form': form})
+
+
+def student_login(request):
+    if request.method == 'POST':
+        form = StudentLoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(email=cd['email'], password=cd['password'])
+            if user is not None:
+                if not user.is_student:
+                    return HttpResponse('This is only for students')
+                if user.is_active:
+                    login(request, user)
+                    # todo handle if no such poll exists
+                    return HttpResponseRedirect(reverse('polls:detail', args=(cd['poll_id'],)))
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = StudentLoginForm()
+    return render(request, 'Login/student_form_login.html', {'form': form})
+
+
+class PersonalPage(generic.DeleteView):
+    model = CustomUser
+    template_name = 'home_page/home_page.html'
+
+
+# for staff self-creation of accounts
+class SignUp(generic.CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'Login/staff_form_login.html'
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        """Return the last five published questions."""
+        """Return the last five published polls."""
 
         return Poll.objects.filter(
             pub_date__lte=timezone.now()
@@ -34,20 +95,12 @@ class DetailView(generic.DetailView):
         return Poll.objects.filter(pub_date__lte=timezone.now())
 
 
-class ResultsView(generic.DetailView):
-    model = Poll
-    template_name = 'polls/results.html'
+def thank_you(request):
+    # model = Poll
+    template = 'polls/thank_you_page.html'
+    context = {}
+    return render(request, template, context)
 
-
-def get_all_values(d):
-    if isinstance(d, dict):
-        for v in d.values():
-            yield from get_all_values(v)
-    elif isinstance(d, list):
-        for v in d:
-            yield from get_all_values(v)
-    else:
-        yield d
 
 # todo -throw errors is some questions are not answered
 def vote_poll(request, poll_id):
@@ -73,9 +126,7 @@ def vote_poll(request, poll_id):
            'error_message': "You didn't select a choice.",
        })
    else:
-
        inter = []
-
        for sublist in interested:
            sublist = [int(item) for item in sublist]
            inter += sublist
@@ -88,4 +139,4 @@ def vote_poll(request, poll_id):
        # Always return an HttpResponseRedirect after successfully dealing
        # with POST data. This prevents data from being posted twice if a
        # user hits the Back button.
-       return HttpResponseRedirect(reverse('polls:results', args=(poll_id,)))
+       return HttpResponseRedirect(reverse('polls:thank_you_page'))
