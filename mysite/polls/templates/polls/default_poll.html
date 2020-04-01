@@ -8,7 +8,7 @@
      <link rel="stylesheet" href="{% static 'style.css' %}">
      <link rel="stylesheet" href="{% static 'polls/poll_style.css' %}">
      <link rel="stylesheet" href="{% static 'polls/poll_style_mobile.css' %}">
-     <link rel="icon" href="../../static/polls/images/inno_logo.png">
+     <link rel="icon" href="{% static 'polls/images/inno_logo.png' %}">
  </head>
  <body>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -34,8 +34,8 @@
                  <div class="radio_option">
                      {% for choice in question.choice_set.all %}
                              <div>
-                                 <input type="radio" name="{{question.id}}" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                                 <input type="radio" name="{{question.id}}" id="choice{{ choice.id  }}" value="{{ choice.id }}">
+                                 <label for="choice{{ choice.id  }}">{{ choice.choice_text }}</label><br>
                              </div>
                      {% endfor %}
                  </div>
@@ -43,8 +43,8 @@
                     <div class="mchoice_option">
                     {% for choice in question.choice_set.all %}
                         <div>
-                            <input type="checkbox" name="{{question.id}}" id="choice.{{ forloop.counter }}" value="{{ choice.id }}">
-                            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                            <input type="checkbox" name="{{question.id}}" id="choice.{{ choice.id  }}" value="{{ choice.id }}">
+                            <label for="choice{{ choice.id  }}">{{ choice.choice_text }}</label><br>
                         </div>
                     {% endfor %}
                      </div>

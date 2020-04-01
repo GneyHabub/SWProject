@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/style.css">
-    <link rel="stylesheet" href="../../static/home_page/home_page_styles.css">
-    <link rel="stylesheet" href="../../static/home_page/home_page_styles_mobile.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'home_page/home_page_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'home_page/home_page_styles_mobile.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
     <header>
         <div class="green_stripe">
-            <button id="sidebar"><img src="../../static/home_page/images/sidebar.png" height="50" width="50"/></button>
+            <button id="sidebar"><img src="{% static 'home_page/images/sidebar.png' %}" height="50" width="50"/></button>
             <h3><a href="https://random.dog/">Log out</a></h3>
         </div>
     </header>
