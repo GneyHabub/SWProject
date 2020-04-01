@@ -18,11 +18,11 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class StaffLoginForm(forms.Form):
-    email = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.CharField(label="", help_text="", widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    password = forms.CharField(label="", help_text="", widget=forms.PasswordInput({'placeholder': 'Password'}))
 
 
 class StudentLoginForm(forms.Form):
-    email = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-    poll_id = forms.IntegerField()
+    email = forms.CharField(label="", help_text="", widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    password = forms.CharField(label="", help_text="", widget=forms.PasswordInput({'placeholder': 'Password'}))
+    poll_id = forms.IntegerField(label="", help_text="", widget=forms.TextInput(attrs={'placeholder': 'Poll id'}))
