@@ -10,25 +10,24 @@
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2) {
-    #inp_box{
+    form{
         width: 100%;
         box-shadow: none;
         background-color: inherit;
-        height: 100%;
     }
-    #inp_box input{
+    form input{
         height: 100px;
         width: 700px;
         margin: 8px;
         font-size: 50px;
     }
-    #inp_box button{
+    form button{
         font-size: 50px;
         margin: 8px;
         height: 100px;
         width: 700px;
     }
-    #inp_box #switch{
+    form #switch{
         font-size: 60px;
         justify-self: flex-end;
     }
