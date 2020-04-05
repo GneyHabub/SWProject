@@ -73,14 +73,29 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     type = models.SmallIntegerField(default='0')
 
+    def __str__(self):
+        return self.question_text
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.choice_text
+
     @classmethod
     def create_choice(cls, question_id, choice):
         return cls(question=question_id, choice_text=choice, votes=1)
+
+    @classmethod
+    def add_choice(cls, question, choice):
+        try:
+            c = question.choice_set.get(choice_text = choice)
+            c.votes += 1
+            return c
+        except(cls.DoesNotExist, cls.MultipleObjectsReturned):
+            return cls.create_choice(question, choice)
 
 

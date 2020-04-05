@@ -113,7 +113,7 @@ def vote_poll(request, poll_id):
            quest = get_object_or_404(Question, id=q)
            if quest.type == 2:
                if post_data.get(q)[0] != "":
-                    c = Choice(question=quest, choice_text=post_data.get(q)[0], votes=1)
+                    c = Choice.add_choice(question=quest, choice=post_data.get(q)[0]) # counts custom choices with the same text as one choice
                     c.save()
                post_data.pop(q)
 
