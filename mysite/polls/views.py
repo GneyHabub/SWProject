@@ -67,8 +67,8 @@ class PersonalPage(generic.DeleteView):
 # for staff self-creation of accounts
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'Login/staff_form_login.html'
+    success_url = reverse_lazy('polls:login_student')
+    template_name = 'Login/signup.html'
 
 
 class IndexView(generic.ListView):

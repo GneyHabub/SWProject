@@ -15,7 +15,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     is_doe = models.BooleanField(default=False)
-    is_student = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=True)
     is_prof = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
