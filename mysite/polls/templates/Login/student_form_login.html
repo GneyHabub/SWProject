@@ -6,19 +6,19 @@
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="icon" href="{% static 'polls/images/inno_logo.png' %}">
-    <link rel="stylesheet" href="{% static 'login/login_styles.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login_styles.css' %}">
     <link rel="stylesheet" href="{% static 'login/login_styles_mobile.css' %}">
 </head>
 <body>
-<header>
-    <h1 id="access_header_text">Student Access</h1>
-</header>
-<form method="post">
+    <header>
+        <h1 id="access_header_text">Student Access</h1>
+    </header>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form }}
         <button type="submit">Login</button>
-        <a href="/polls/login_staff" id="switch">I'm NOT a student</a>
+        <a href="/polls/login_staff" id="switch">I'm a staff member</a>
     </form>
 </body>
 </html>

@@ -15,7 +15,7 @@ header h1{
     font-size: 70px;
 }
 
-#inp_box{
+form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +26,7 @@ header h1{
     padding: 6px;
 }
 
-#inp_box input{
+form input{
     background-color: #C4C4C4;
     border: none;
     padding: 2%;
@@ -37,7 +37,7 @@ header h1{
     outline: none;
 }
 
-#inp_box button{
+form button{
     background-color: #4EA952;
     border: none;
     margin: 2%;
@@ -49,11 +49,11 @@ header h1{
     cursor: pointer;
 }
 
-#inp_box button:hover {
+form button:hover {
     background-color: #3a833a;
 }
 
-#inp_box #switch{
+form #switch{
     background-color: inherit;
     border: none;
     color: #0D3911;
