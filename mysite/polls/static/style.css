@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body{
+    background-color: #F1FAFC;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+button{
+    background-color: #4EA952;
+    border: none;
+    margin: 2%;
+    width: 60%;
+    height: 35px;
+    font-size: 20px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3a833a;
+}
+
+.green_stripe {
+    background-color: #4EA952;
+    padding: 10px 40px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.green_stripe h3 {
+    align-self: center;
+    font-size: 17px;
+    margin: 4px;
+}
+.green_stripe h3 a {
+    color: #0D3911;
+}
+
+.icon_image{
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+}

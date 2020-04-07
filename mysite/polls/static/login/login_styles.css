@@ -15,7 +15,7 @@ header h1{
     font-size: 70px;
 }
 
-#inp_box{
+form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,18 +26,18 @@ header h1{
     padding: 6px;
 }
 
-#inp_box input{
+form input{
     background-color: #C4C4C4;
     border: none;
     padding: 2%;
-    margin: 2%;
+    margin: 1%;
     width: 60%;
     height: 35px;
     font-size: 13px;
     outline: none;
 }
 
-#inp_box button{
+form button{
     background-color: #4EA952;
     border: none;
     margin: 2%;
@@ -49,51 +49,15 @@ header h1{
     cursor: pointer;
 }
 
-#inp_box button:hover {
+form button:hover {
     background-color: #3a833a;
 }
 
-#inp_box #switch{
+form #switch{
     background-color: inherit;
     border: none;
     color: #0D3911;
     font-size: 15px;
     margin: 0;
     outline: none;
-}
-
-#inp_box #survey_id{
-    display: none;
-}
-
-@media only screen and (max-width: 800px) {
-    header h1{
-        font-size: 50px;
-    }
-}
-@media only screen and (max-width: 600px) {
-    header h1{
-        font-size: 40px;
-    }
-}
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2) {
-    #inp_box{
-        width: 100%;
-        height: 300px;
-        box-shadow: none;
-        background-color: inherit;
-    }
-    #inp_box input{
-        height: 50px;
-        margin: 8px;
-        font-size: 25px;
-    }
-    #inp_box button{
-        margin: 8px;
-        height: 50px;
-    }
-    #inp_box #switch{
-        font-size: 30px;
-    }
-
 }

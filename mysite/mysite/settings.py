@@ -25,13 +25,15 @@ SECRET_KEY = 'bi(l8*_0me(y8$yt_^jrz3xfbbfr_9-()=u8y4@a%$@mk(e9k^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    'polls',
+    'nested_admin',
+    # 'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,6 +87,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'polls.CustomUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

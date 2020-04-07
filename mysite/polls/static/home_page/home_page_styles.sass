@@ -1,0 +1,71 @@
+$main_green: #4EA952
+$main_blue: #BBEAF4
+$main_purple: #9C27B0
+$link_color: #0D3911
+$font: 'Montserrat', serif
+$subtle_gray: #727272
+$default_shadow: 5px 5px 5px darkgray
+
+.main_body
+  height: 100%
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: auto
+  align-items: stretch
+
+nav
+  display: none
+  background-color: white
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  box-shadow: $default_shadow
+  height: 100vh
+  width: 17vw
+  left: 0
+  button
+    @media (max-width: 850px)
+      font-size: 14px
+    height: 60px
+    width: 80%
+  .icon_and_name
+    margin: 20px
+    display: grid
+    grid-template-columns: 1fr
+    justify-items: center
+    align-items: center
+    h2
+      font-size: 15px
+    .icon_image
+      height: 70px
+      width: 70px
+
+.default_ranking
+  width: 80%
+  height: 70%
+  justify-self: center
+
+.on_scroll
+  position: fixed
+  top: 0
+
+.main_body_on_scroll
+  margin-left: 360px
+
+.green_stripe
+  @media (max-width: 850px)
+    height: 40px
+  button
+    background-color: inherit
+    height: 50px
+    width: 50px
+    margin: 0
+    padding: 0
+    @media (max-width: 850px)
+      height: 30px
+      width: 30px
+    img
+      @media (max-width: 850px)
+        height: 30px
+        width: 30px
+

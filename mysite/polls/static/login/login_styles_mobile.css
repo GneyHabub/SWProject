@@ -1,0 +1,37 @@
+@media only screen and (max-width: 800px) {
+    header h1{
+        font-size: 50px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    header h1{
+        font-size: 40px;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2) {
+    form{
+        width: 100%;
+        box-shadow: none;
+        background-color: inherit;
+    }
+    form input{
+        height: 100px;
+        width: 700px;
+        margin: 8px;
+        font-size: 50px;
+    }
+    form button{
+        font-size: 50px;
+        margin: 8px;
+        height: 100px;
+        width: 700px;
+    }
+    form #switch{
+        font-size: 60px;
+        justify-self: flex-end;
+    }
+    header h1{
+        font-size: 80px;
+    }
+}
