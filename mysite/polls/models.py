@@ -8,12 +8,15 @@ from django.utils import timezone
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin )
 from django.utils.translation import gettext_lazy as _
+import PIL
 
 from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
+    name = models.CharField(max_length=200, default="Ivan")
+    surname = models.CharField(max_length=200, default="Petrov")
     is_doe = models.BooleanField(default=False)
     is_student = models.BooleanField(default=True)
     is_prof = models.BooleanField(default=False)
@@ -30,19 +33,44 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-# class User(models.Model):
-#     name = models.CharField(max_length=64) #full name
-#     email = models.CharField(max_length=32)
-#     password = models.CharField(max_length=32)
-#     role = models.SmallIntegerField()
-# 0 is for student
-# 1 is for prof
-# 2 is for higher authorities (doe members)
-    
+class Group(models.Model):
+    group = models.CharField(max_length=200, default="BS18-03")
 
-# class Student(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     group = models.CharField(max_length=16) #i.e. BS18-06
+
+class Student(CustomUser):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, parent_link=True)
+    # track is also part of a direction
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    graduation_year = models.IntegerField()
+
+
+class DoeMember(CustomUser):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, parent_link=True)
+    photo = models.ImageField(default=None, upload_to='database_pictures')
+
+
+class Professor(CustomUser):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, parent_link=True)
+    photo = models.ImageField(default=None, upload_to='database_pictures')
+
+
+class Course(models.Model):
+    title = models.CharField(max_length=200)
+    # to mark the semester
+    description = models.CharField(max_length=1000)
+    is_elective = models.BooleanField(default=False)
+
+
+class GroupCourse(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+
+class Teaches(models.Model):
+    prof = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    year = models.IntegerField()
+    is_fall = models.BooleanField(default=False)
 
 
 class Poll(models.Model):
@@ -50,7 +78,7 @@ class Poll(models.Model):
     pub_date = models.DateTimeField('date published')
     open_date = models.DateTimeField()
     close_date = models.DateTimeField()
-    # allowed_users = models.ManyToManyField(CustomUser)
+    # teachers = models.ForeignKey(Teaches, on_delete=models.CASCADE, default=1)
 
     def was_published_recently(self):
         now = timezone.now()
@@ -63,6 +91,12 @@ class Poll(models.Model):
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
+
+
+class Votes(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+    voted = models.BooleanField(default=False)
 
 
 # 0 is for 1 choice questions
