@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Courses</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../static/style.css" />
+    <link rel="stylesheet" href="../../static/courses_list/courses_list_styles.css" />
+  </head>
+  <body>
+
+    <header>
+        <div class="green_stripe">
+            <h3><a href="{% url 'polls:home_page' %}">My account</a></h3>
+            <h3 class="page_title">Courses</h3>
+            <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
+        </div>
+    </header>
+
+<!--
+    <header>
+      <div class="green_stripe">
+        <h3>Log out</h3>
+      </div>
+      <div class="white_stripe">
+        <h3>My account</h3>
+        <h3>Surveys</h3>
+      </div>
+    </header>
+-->
+    <div class="main_body">
+      <div class="search_field">
+        <form>
+          <div id="first_row">
+            <input type="search" id="search" />
+            <input type="submit" id="submit" value="Apply" />
+          </div>
+          <div id="second_row">
+            <select name="semester" size="1" id="semester" class="parameter">
+              <option selected>Semester</option>
+              <option value="spring20">Spring 2020</option>
+              <option value="fall19">Fall 2019</option>
+              <option value="spring19">Spring 2019</option>
+              <option value="fall18">Fall 2018</option>
+              <option value="spring18">Spring 2018</option>
+              <option value="fall17">Fall 2017</option>
+            </select>
+            <select name="profile" size="1" id="profile" class="parameter">
+              <option selected>Profile</option>
+              <option value="math">Math</option>
+              <option value="cs">Computer Science</option>
+              <option value="physics">Physics</option>
+              <option value="english">English</option>
+              <option value="hum">Hum Elective</option>
+            </select>
+            <select name="degree" size="1" id="degree" class="parameter">
+              <option selected>Degree</option>
+              <option value="bachelor">Bachelor</option>
+              <option value="master">Master</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="course_info">
+        <h2 class="course_title">Title</h2>
+        <p class="course_description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+      </div>
+      <div class="course_info">
+        <h2 class="course_title">Title</h2>
+        <p class="course_description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+      </div>
+    </div>
+  </body>
+</html>
