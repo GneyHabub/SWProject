@@ -1,0 +1,50 @@
+.main_body {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.search_field {
+    height: 170px;
+    width: 830px;
+    max-width: 95%;
+    padding: 20px 50px;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.search_field #search {
+    padding: 10px 20px;
+    height: 30px;
+    width: 80%;
+    background-color: #d6d6d6;
+    border: 1px solid #5E695F;
+}
+
+.search_field #submit {
+    height: 30px;
+    width: 90px;
+    background-color: #4EA952;
+    border: 1px solid #5E695F;
+}
+
+.search_field .parameter {
+    height: 30px;
+    width: 160px;
+    padding: 0px 10px;
+    background-color: #D6D6D6;
+    border: 1px solid #5E695F;
+}
+
+.course_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #9C27B0;
+    margin: 30px;
+}
