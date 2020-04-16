@@ -1,6 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 
+
 from . import views
 
 app_name = 'polls'
@@ -16,4 +17,6 @@ urlpatterns = [
     url(r'^login_staff/$', views.staff_login, name='login_staff'),
     url(r'^login_student/$', views.student_login, name='login_student'),
     path('<int:pk>/user', views.PersonalPage.as_view(), name='personal_page')
+
 ]
+

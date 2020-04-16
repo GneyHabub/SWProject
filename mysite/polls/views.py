@@ -9,11 +9,17 @@ from django.views import generic
 from django.utils import timezone
 
 from .forms import CustomUserCreationForm
-from .models import Choice, Question, Poll, CustomUser
+from .models import Choice, Question, Poll, CustomUser, Votes, Student
 
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login
+from .auth import AuthBackend
+from django.contrib.auth import login, logout
 from .forms import StaffLoginForm, StudentLoginForm
+
+
+def custom_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('polls:login_staff'))
 
 
 def staff_login(request):
@@ -21,7 +27,8 @@ def staff_login(request):
         form = StaffLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(email=cd['email'], password=cd['password'])
+            back = AuthBackend()
+            user = back.authenticate(request, email=cd['email'], password=cd['password'])
             if user is not None:
                 if user.is_student:
                     return HttpResponse('Unavailable for students ')
@@ -42,14 +49,24 @@ def student_login(request):
         form = StudentLoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(email=cd['email'], password=cd['password'])
+            back = AuthBackend()
+            user = back.authenticate(request, email=cd['email'], password=cd['password'])
             if user is not None:
                 if not user.is_student:
                     return HttpResponse('This is only for students')
                 if user.is_active:
-                    login(request, user)
+                    student = Student.objects.get(email=cd['email'])
+                    try:
+                        vote = Votes.objects.get(poll=cd['poll_id'], student=student.pk)
+                        if vote.voted:
+                            return HttpResponse('You have already voted')
+                        vote.voted = True
+                        vote.save()
+                        login(request, user)
                     # todo handle if no such poll exists
-                    return HttpResponseRedirect(reverse('polls:detail', args=(cd['poll_id'],)))
+                        return HttpResponseRedirect(reverse('polls:detail', args=(cd['poll_id'],)))
+                    except Votes.DoesNotExist:
+                        return HttpResponse('You should not have access to this poll')
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -67,8 +84,8 @@ class PersonalPage(generic.DeleteView):
 # for staff self-creation of accounts
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'Login/staff_form_login.html'
+    success_url = reverse_lazy('polls:login_student')
+    template_name = 'Login/signup.html'
 
 
 class IndexView(generic.ListView):
@@ -113,7 +130,7 @@ def vote_poll(request, poll_id):
            quest = get_object_or_404(Question, id=q)
            if quest.type == 2:
                if post_data.get(q)[0] != "":
-                    c = Choice(question=quest, choice_text=post_data.get(q)[0], votes=1)
+                    c = Choice.add_choice(question=quest, choice=post_data.get(q)[0]) # counts custom choices with the same text as one choice
                     c.save()
                post_data.pop(q)
 
@@ -139,4 +156,5 @@ def vote_poll(request, poll_id):
        # Always return an HttpResponseRedirect after successfully dealing
        # with POST data. This prevents data from being posted twice if a
        # user hits the Back button.
+
        return HttpResponseRedirect(reverse('polls:thank_you_page'))

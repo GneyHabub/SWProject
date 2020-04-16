@@ -14,14 +14,14 @@
     <header>
         <div class="green_stripe">
             <button id="sidebar"><img src="{% static 'home_page/images/sidebar.png' %}" height="50" width="50"/></button>
-            <h3><a href="https://random.dog/">Log out</a></h3>
+            <h3><a href="{% url 'polls:login_staff' %}">Log out</a></h3>
         </div>
     </header>
     <div class="main_body">
         <nav id="nav">
             <div class="icon_and_name">
-                <img src="https://i.pinimg.com/originals/b0/26/c7/b026c7f98aa6de974e9698e08c32e6cf.png" alt="Corgi" class="icon_image">
-                <h2>Vladimir Putin</h2>
+                <img src="{{ user.photo.url }}"  alt="Corgi" class="icon_image">
+                <h2>{{user.name}} {{user.surname}}</h2>
             </div>
             <button id="to_courses">Courses</button>
             <button id="to_analytics">Analytics</button>
