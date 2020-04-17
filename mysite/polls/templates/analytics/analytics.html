@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <header>
+        <div class="green_stripe">
+            <h3><a href="{% url 'polls:home_page' %}">My account</a></h3>
+            <h3 class="page_title">Analytics</h3>
+            <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
+        </div>
+    </header>
+    <div id="app">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="../../static/analytics/data.js"></script>
+    <script src="../../static/analytics/index.js"></script>
+</body>
+</html>
