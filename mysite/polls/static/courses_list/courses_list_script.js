@@ -107,5 +107,13 @@ new Vue({
             res = res.filter(course => course.name.match(filter));
             return res;
         }
+    },
+    methods: {
+        reset_filter() {
+            this.selected_semester = "Semester";
+            this.selected_profile = "Profile";
+            this.selected_degree = "Degree";
+            this.filter_query = "";
+        }
     }
 });

@@ -26,13 +26,6 @@
     border: 1px solid #5E695F;
 }
 
-.search_field #submit {
-    height: 30px;
-    width: 90px;
-    background-color: #4EA952;
-    border: 1px solid #5E695F;
-}
-
 .search_field .parameter {
     height: 30px;
     width: 160px;
@@ -47,4 +40,14 @@
     align-items: flex-start;
     color: #9C27B0;
     margin: 30px;
+}
+
+input[type="button"]{
+    height: 30px;
+    width: 90px;
+    background-color: #4EA952;
+    border: 1px solid #5E695F;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
 }

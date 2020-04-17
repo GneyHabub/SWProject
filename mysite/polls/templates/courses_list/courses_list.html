@@ -37,6 +37,7 @@
         <form>
           <div id="first_row">
             <input type="search" id="search" v-model="filter_query"/>
+            <input type="button" value="Reset" @click="reset_filter"/>
           </div>
           <div id="second_row">
             <select name="semester" size="1" id="semester" class="parameter" v-model="selected_semester">
