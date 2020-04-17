@@ -1,36 +1,29 @@
-new Vue({
-    el:"#app",
-    data() {
-        return {
-            
-        }
-    }
-});
-
 let avg_data = [];
 for (let item in data){
     avg_data.push(data[item].reduce( ( p, c ) => p + c, 0 )/data[item].length);
 }
 
-var ctx = document.getElementById('myChart').getContext('2d');
-                var myChart = new Chart(ctx, {
+document.getElementsByClassName("page_title")[0].innerHTML = course_name;
+
+let ctx = document.getElementById('chart').getContext('2d');
+                let myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: Object.keys(data),
                         datasets: [{
-                            label: '# of Votes',
+                            label: 'Average result',
                             data: avg_data,
                             backgroundColor: [
-                                'rgba(255,28,31,0.35)'
+                                'rgba(78, 169, 32, 0.35)'
                             ],
                             borderColor: [
-                                'rgb(246,14,34)'
+                                'rgb(120, 169, 78)'
                             ],
                             borderWidth: 1
                         }]
                     },
                     options: {
-                        lineTension: 0.1,
+                        lineTension: 0,
                         scales: {
                             yAxes: [{
                                 ticks: {

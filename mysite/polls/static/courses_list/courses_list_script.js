@@ -1,8 +1,8 @@
 Vue.component('course_info', {
     template: `
         <div class="course_info">
-            <h2>{{course_name}}</h2>
-            <p>{{course_description}}</p>
+            <h2 @click="load">{{course_name}}</h2>
+            <p @click="load">{{course_description}}</p>
         </div>`,
     props: {
         course_name:{
@@ -12,6 +12,11 @@ Vue.component('course_info', {
         },
         course_description:{
             type: "String"
+        }
+    },
+    methods: {
+        load(){
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         }
     }
 })
@@ -67,22 +72,22 @@ new Vue({
 
             course_descriptions: [
                 {
-                    name: "Math",
-                    desc: "ouygugv",
+                    name: "[S20] Probability and Statistics",
+                    desc: "I don't understand what I am supposed to place here",
                     semester: "spring20",
                     profile: "math",
                     degree: "bachelor"
                 },
                 {
                     name: "CompArc",
-                    desc: "jgvugvvo",
+                    desc: "I don't understand what I am supposed to place here",
                     semester: "spring19",
                     profile: "cs",
                     degree: "bachelor"
                 },
                 {
                     name: "English",
-                    desc: "jgvugvvo",
+                    desc: "I don't understand what I am supposed to place here",
                     semester: "fall19",
                     profile: "english",
                     degree: "bachelor"

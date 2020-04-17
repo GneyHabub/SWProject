@@ -5,12 +5,23 @@ header {
 .white_stripe {
   background-color: white;
   padding: 10px 40px;
-  box-shadow: 5px 5px 5px darkgray;
+  -webkit-box-shadow: 5px 5px 5px darkgray;
+          box-shadow: 5px 5px 5px darkgray;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
+
 .white_stripe .survey_number {
   font-size: 15px;
   color: #727272;
@@ -20,12 +31,15 @@ header {
   background-color: #BBEAF4;
   margin: 30px 0;
   padding: 35px 12%;
-  box-shadow: 5px 5px 5px darkgray;
+  -webkit-box-shadow: 5px 5px 5px darkgray;
+          box-shadow: 5px 5px 5px darkgray;
 }
+
 .poll_title .poll_name {
   color: #9C27B0;
   margin: 0;
 }
+
 .poll_title .poll_subtitle {
   margin: 0;
   font-size: 17px;
@@ -44,11 +58,17 @@ header {
 }
 
 .radio_option {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   padding: 10px 60px;
 }
+
 .radio_option h3 {
   font-size: 20px;
 }
@@ -56,10 +76,16 @@ header {
 .mchoice_option {
   padding: 10px 60px;
 }
+
 .mchoice_option div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .mchoice_option input {
   height: 40px;
   width: 40px;
@@ -73,9 +99,15 @@ header {
 }
 
 .submit_button {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 button {
@@ -87,13 +119,19 @@ button {
 
 footer {
   height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   padding: 10px;
 }
+
 footer div {
   color: #727272;
 }
-
 /*# sourceMappingURL=poll_style.css.map */

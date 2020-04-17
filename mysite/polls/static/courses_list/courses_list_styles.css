@@ -42,6 +42,14 @@
     margin: 30px;
 }
 
+.course_info h2{
+    cursor: pointer;
+}
+
+.course_info p{
+    cursor: pointer;
+}
+
 input[type="button"]{
     height: 30px;
     width: 90px;
