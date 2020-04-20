@@ -105,6 +105,9 @@ class Poll(models.Model):
     close_date = models.DateTimeField()
     # teachers = models.ForeignKey(Teaches, on_delete=models.CASCADE, default=1)
 
+    def __str__(self):
+        return self.poll_name
+    
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
@@ -112,6 +115,22 @@ class Poll(models.Model):
     def open(self):
         now = timezone.now()
         return self.open_date <= now <= self.close_date
+
+    def copy(self):
+        p = Poll(poll_name=self.poll_name)
+        p.pub_date = timezone.now()
+        p.open_date = timezone.now()
+        p.close_date = timezone.now() + datetime.timedelta(weeks=2)
+        p.save()
+        for q in self.question_set.all():
+            q1 = q.copy(p)
+        return p
+
+    def create_similar(modeladmin, request, queryset):
+        for p in queryset:
+            p1 = p.copy()
+
+    create_similar.short_discription = "Create copies of selected polls"
 
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
@@ -141,6 +160,13 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    def copy(self, poll):
+        q = Question(poll=poll, question_text=self.question_text, type=self.type)
+        q.save()
+        for c in self.choice_set.all():
+            c1 = c.copy(q)
+        return q
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -149,6 +175,13 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+    def copy(self, question):
+        self.pk = None
+        self.question = question
+        self.votes = 0
+        self.save()
+        return self
 
     @classmethod
     def create_choice(cls, question_id, choice):
