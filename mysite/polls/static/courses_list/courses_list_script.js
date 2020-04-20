@@ -38,6 +38,10 @@ new Vue({
                 {
                     name: "Spring 2019",
                     value: "spring19"
+                },
+                {
+                    name: "Fall 2018",
+                    value: "fall18"
                 }
             ],
             selected_semester:"Semester",
@@ -73,23 +77,58 @@ new Vue({
             course_descriptions: [
                 {
                     name: "[S20] Probability and Statistics",
-                    desc: "I don't understand what I am supposed to place here",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
                     semester: "spring20",
                     profile: "math",
                     degree: "bachelor"
                 },
                 {
-                    name: "CompArc",
-                    desc: "I don't understand what I am supposed to place here",
-                    semester: "spring19",
+                    name: "[F18] Computer Architecture",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "fall18",
                     profile: "cs",
                     degree: "bachelor"
                 },
                 {
-                    name: "English",
-                    desc: "I don't understand what I am supposed to place here",
-                    semester: "fall19",
+                    name: "[S19] English for Academic Purposes II",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "spring19",
                     profile: "english",
+                    degree: "bachelor"
+                },
+                {
+                    name: "[S19] Analytical Geometry and Linear Algebra II",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "spring19",
+                    profile: "math",
+                    degree: "bachelor"
+                },
+                {
+                    name: "[F19] Operating Systems",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "fall19",
+                    profile: "cs",
+                    degree: "bachelor"
+                },
+                {
+                    name: "[S20] Control Theory (Linear Control)",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "spring20",
+                    profile: "math",
+                    degree: "bachelor"
+                },
+                {
+                    name: "[F18] Introduction to Programming I",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "fall18",
+                    profile: "cs",
+                    degree: "bachelor"
+                },
+                {
+                    name: "[F19] Physics I (mechanics)",
+                    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec felis vel leo pellentesque porttitor. Nam a urna eu urna mattis luctus. Nullam dapibus suscipit velit, sed tempor lectus auctor ac. Vivamus sit amet orci at augue rutrum fermentum vitae interdum massa. Praesent in mauris quis sem fringilla consequat. Sed sed neque at sem pharetra volutpat.",
+                    semester: "fall19",
+                    profile: "math",
                     degree: "bachelor"
                 }
             ],
