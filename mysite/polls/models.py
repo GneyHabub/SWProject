@@ -34,7 +34,32 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Group(models.Model):
-    group = models.CharField(max_length=200, default="BS18-03")
+    DEGREE_CHOICES = [
+        ('BS', 'Bachelor'),
+        ('MS', 'Master'),
+    ]
+    TRACK_CHOICES = [
+        ('DS', 'Data Science'),
+        ('SE', 'Software Engineering'),
+        ('SNE', 'Security and Networks Engineering'),
+        ('AIR' , 'Robotics'),
+        ('-' , 'No track')
+    ]
+    degree = models.CharField(max_length=2, choices=DEGREE_CHOICES, default='BS')
+    starting_year = models.CharField(max_length=2, default='18')
+    group_number = models.CharField(max_length=2, default='03')
+    track = models.CharField(max_length=3, choices=TRACK_CHOICES, default='-')
+
+    #TODO: test this shit
+    def short_name(self):
+        name = self.degree + self.starting_year
+        if(self.track != '-'):
+            name += '-' + self.track
+        name += '-' + self.group_number
+        return name
+
+    def __str__(self):
+        return self.short_name()
 
 
 class Student(CustomUser):
@@ -103,9 +128,15 @@ class Votes(models.Model):
 # 1 is for many choice questions
 # 2 is for input text
 class Question(models.Model):
+    TYPE_CHOICES = [
+        (0, 'Single choice'),
+        (1, 'Multichoice'),
+        (2, 'Input text'),
+        ]
+    
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=200)
-    type = models.SmallIntegerField(default='0')
+    type = models.SmallIntegerField(default='0', choices=TYPE_CHOICES)
 
     def __str__(self):
         return self.question_text
