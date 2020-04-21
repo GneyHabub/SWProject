@@ -128,6 +128,7 @@ class PollAdmin(nested_admin.NestedModelAdmin):
     list_display = ('poll_name', 'pub_date', 'open_date', 'close_date')
     list_filter = ['pub_date']
     sortable_options = "id"
+    actions = [Poll.create_similar]
 
 
 
