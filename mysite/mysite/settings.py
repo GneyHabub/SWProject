@@ -90,6 +90,13 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'polls.CustomUser'
 
+AUTHENTICATION_BACKENDS = (
+    'polls.auth.AuthBackend',
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
