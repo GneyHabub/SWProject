@@ -183,23 +183,38 @@ def course_list_render(request, prof_id):
     return render(request, 'courses_list/courses_list.html')
 
 
+def surveys_list_render(request, prof_id):
+    return render(request, 'surveys_list/surveys_list.html')
 
-def course_analytics(request, prof_id, course_id):
+
+def analytics_render(request, prof_id):
+    return render(request, 'analytics/analytics.html')
+
+
+def analytics():
     pass
 
-
-def general_analytics(request, course_id):
-    pass
-
+# todo serialize
 @api_view(('GET',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def surveys_list(request, prof_id):
     if request.method == 'GET':
         user = CustomUser.objects.get(pk=prof_id)
+        res = list()
         if user.is_prof:
-            courses_id = list(Teaches.objects.filter(prof=prof_id).values_list('id', flat=True))
-            surveys = list(Poll.objects.filter(teachers__in=courses_id))
+            teaches_query = list(Teaches.objects.filter(prof=prof_id).values_list('id', 'year', 'is_fall'))
+            teaches_id = [i[0] for i in teaches_query]
+            surveys = list(Poll.objects.filter(teachers__in=teaches_id).
+                           values_list('poll_name', 'open_date', 'close_date', 'teachers'))
+            for s in surveys:
+                teaches_rel = teaches_query[teaches_id.index(s[3])]
+                res.append({'poll_title': s[0], 'year': teaches_rel[1], 'semester': teaches_rel[2],
+                            'open_date': s[1], 'close_date': s[2]})
         else:
-            surveys = list()
-    return JsonResponse(surveys)
+            surveys = list(Poll.objects.values_list('poll_name', 'open_date', 'close_date', 'teachers'))
+            for s in surveys:
+                teaches_rel = list(Teaches.objects.filter(id=s[3]).values_list('id', 'year', 'is_fall'))[0]
+                res.append({'poll_title': s[0], 'year': teaches_rel[1], 'semester': teaches_rel[2],
+                            'open_date': s[1], 'close_date': s[2]})
+    return JsonResponse({'SURVEYS ': res})
 

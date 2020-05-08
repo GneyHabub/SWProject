@@ -27,9 +27,15 @@
                 <a href="{% url 'polls:course_list_render' prof_id=user.id %}">Courses</a>
             </button>
 
-            <button id="to_analytics">Analytics</button>
-            <button id="to_surveys">Surveys</button>
-            <button id="to_constructor">Create new survey</button>
+            <button id="to_analytics">
+                <a href="{% url 'polls:analytics_render' prof_id=user.id %}">Analytics</a>
+            </button>
+            <button id="to_surveys">
+                <a href="{% url 'polls:surveys_list_render' prof_id=user.id %}">Surveys</a>
+            </button>
+            <button id="to_constructor">
+                <a href="{% url 'polls:analytics_render' prof_id=user.id %}">Create new survey</a>
+            </button>
         </nav>
         <div class="default_ranking" style="position: relative; height:40vh; width:70vw">
             <canvas id="myChart"></canvas>

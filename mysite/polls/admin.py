@@ -123,9 +123,10 @@ class PollAdmin(nested_admin.NestedModelAdmin):
         (None, {'fields': ['poll_name']}),
         ('Date information', {'fields': ['pub_date']}),
         ('Available dates', {'fields': ['open_date', 'close_date']}),
+        ('Connection with Prof', {'fields': ['teachers']})
     ]
     inlines = [QuestionInline]
-    list_display = ('poll_name', 'pub_date', 'open_date', 'close_date')
+    list_display = ('poll_name', 'pub_date', 'open_date', 'close_date', 'teachers')
     list_filter = ['pub_date']
     sortable_options = "id"
     actions = [Poll.create_similar]

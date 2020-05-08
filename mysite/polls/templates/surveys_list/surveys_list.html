@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+   {% load static %}
     <meta charset="UTF-8" />
     <title>Surveys</title>
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../../static/style.css" />
-    <link rel="stylesheet" href="../../static/surveys_list/surveys_list_styles.css" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'surveys_list/surveys_list_styles.css' %}" />
   </head>
   <body>
     <header>
       <div class="green_stripe">
-        <h3><a href="{% url 'polls:home_page' %}">My account</a></h3>
+        <h3><a href="{% url 'polls:personal_page' user.id %}">My account</a></h3>
         <h3 class="page_title">Surveys</h3>
         <h3>
           <a href="{% url 'polls:login_staff' %}" class="logout_link"

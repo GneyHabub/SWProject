@@ -20,7 +20,12 @@ urlpatterns = [
 
     url(r'(?P<prof_id>[0-9]+)/courses_api/$', views.course_list, name='course_list'),
     url(r'(?P<prof_id>[0-9]+)/courses/$', views.course_list_render, name='course_list_render'),
-    # url(r'(?P<prof_id>[0-9]+)/courses/$', views.surveys_list, name='surveys_list'),
+
+    url(r'(?P<prof_id>[0-9]+)/surveys/$', views.surveys_list_render, name='surveys_list_render'),
+    url(r'(?P<prof_id>[0-9]+)/surveys_api/$', views.surveys_list, name='surveys_list'),
+
+    url(r'(?P<prof_id>[0-9]+)/analytics/$', views.analytics_render, name='analytics_render'),
+    url(r'(?P<prof_id>[0-9]+)/analytics_api/$', views.analytics, name='analytics_api'),
 
 ]
 
