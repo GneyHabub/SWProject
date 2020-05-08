@@ -16,7 +16,8 @@ urlpatterns = [
     path('signup/', views.SignUp.as_view(), name='signup'),
     url(r'^login_staff/$', views.staff_login, name='login_staff'),
     url(r'^login_student/$', views.student_login, name='login_student'),
-    path('<int:pk>/user', views.PersonalPage.as_view(), name='personal_page')
+    path('<int:pk>/user', views.PersonalPage.as_view(), name='personal_page'),
 
+    url(r'(?P<prof_id>[0-9]+)/courses/$', views.course_list, name='course_list')
 ]
 

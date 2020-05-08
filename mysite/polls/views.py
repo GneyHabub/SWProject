@@ -1,20 +1,25 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Question
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from rest_framework.response import Response
 
 from .forms import CustomUserCreationForm
-from .models import Choice, Question, Poll, CustomUser, Votes, Student
+from .models import Choice, Question, Poll, CustomUser, Votes, Student, Course, Teaches
 
 from django.urls import reverse_lazy
 from .auth import AuthBackend
 from django.contrib.auth import login, logout
 from .forms import StaffLoginForm, StudentLoginForm
+from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from rest_framework.decorators import api_view, renderer_classes
+
 
 
 def custom_logout(request):
@@ -158,3 +163,31 @@ def vote_poll(request, poll_id):
        # user hits the Back button.
 
        return HttpResponseRedirect(reverse('polls:thank_you_page'))
+
+
+@api_view(('GET',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def course_list(request, prof_id):
+    if request.method == 'GET':
+        user = CustomUser.objects.get(pk=prof_id)
+        if user.is_prof:
+            courses_id = set(Teaches.objects.filter(prof=prof_id).values_list('course', flat=True))
+            courses = list(Course.objects.filter(id__in=courses_id).values_list('title', flat=True))
+        else:
+            courses = list(Course.objects.all().values_list('title', flat=True))
+    # print({"COURSES": courses})
+    return JsonResponse({"COURSES": courses})
+
+
+
+def course_analytics(request, prof_id, course_id):
+    pass
+
+
+def general_analytics(request, course_id):
+    pass
+
+
+def surveys_list(request, prof_id):
+    pass
+

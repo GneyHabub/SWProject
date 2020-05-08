@@ -23,7 +23,10 @@
                 <img src="{{ user.photo.url }}"  alt="Corgi" class="icon_image">
                 <h2>{{user.name}} {{user.surname}}</h2>
             </div>
-            <button id="to_courses">Courses</button>
+            <button id="to_courses">
+                <a href="{% url 'polls:course_list' prof_id=user.id %}">Courses</a>
+            </button>
+
             <button id="to_analytics">Analytics</button>
             <button id="to_surveys">Surveys</button>
             <button id="to_constructor">Create new survey</button>
