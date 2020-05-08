@@ -24,7 +24,7 @@
                 <h2>{{user.name}} {{user.surname}}</h2>
             </div>
             <button id="to_courses">
-                <a href="{% url 'polls:course_list' prof_id=user.id %}">Courses</a>
+                <a href="{% url 'polls:course_list_render' prof_id=user.id %}">Courses</a>
             </button>
 
             <button id="to_analytics">Analytics</button>

@@ -179,6 +179,10 @@ def course_list(request, prof_id):
     return JsonResponse({"COURSES": courses})
 
 
+def course_list_render(request, prof_id):
+    return render(request, 'courses_list/courses_list.html')
+
+
 
 def course_analytics(request, prof_id, course_id):
     pass
@@ -187,7 +191,15 @@ def course_analytics(request, prof_id, course_id):
 def general_analytics(request, course_id):
     pass
 
-
+@api_view(('GET',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def surveys_list(request, prof_id):
-    pass
+    if request.method == 'GET':
+        user = CustomUser.objects.get(pk=prof_id)
+        if user.is_prof:
+            courses_id = list(Teaches.objects.filter(prof=prof_id).values_list('id', flat=True))
+            surveys = list(Poll.objects.filter(teachers__in=courses_id))
+        else:
+            surveys = list()
+    return JsonResponse(surveys)
 

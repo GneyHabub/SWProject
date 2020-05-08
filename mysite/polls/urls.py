@@ -18,6 +18,9 @@ urlpatterns = [
     url(r'^login_student/$', views.student_login, name='login_student'),
     path('<int:pk>/user', views.PersonalPage.as_view(), name='personal_page'),
 
-    url(r'(?P<prof_id>[0-9]+)/courses/$', views.course_list, name='course_list')
+    url(r'(?P<prof_id>[0-9]+)/courses_api/$', views.course_list, name='course_list'),
+    url(r'(?P<prof_id>[0-9]+)/courses/$', views.course_list_render, name='course_list_render'),
+    # url(r'(?P<prof_id>[0-9]+)/courses/$', views.surveys_list, name='surveys_list'),
+
 ]
 

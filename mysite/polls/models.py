@@ -103,7 +103,7 @@ class Poll(models.Model):
     pub_date = models.DateTimeField('date published')
     open_date = models.DateTimeField()
     close_date = models.DateTimeField()
-    # teachers = models.ForeignKey(Teaches, on_delete=models.CASCADE, default=1)
+    teachers = models.ForeignKey(Teaches, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.poll_name
