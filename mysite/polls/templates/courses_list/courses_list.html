@@ -40,23 +40,23 @@
             <input type="search" id="search" v-model="filter_query"/>
             <input type="button" value="Reset" @click="reset_filter"/>
           </div>
-          <div id="second_row">
-            <select name="semester" size="1" id="semester" class="parameter" v-model="selected_semester">
-              <option selected>Semester</option>
-              <option :value="semester.value" v-for="semester in semesters">{{semester.name}}</option>
-            </select>
-            <select name="profile" size="1" id="profile" class="parameter" v-model="selected_profile">
-              <option selected>Profile</option>
-              <option :value="profile.value" v-for="profile in profiles">{{profile.name}}</option>
-            </select>
-            <select name="degree" size="1" id="degree" class="parameter" v-model="selected_degree">
-              <option selected>Degree</option>
-              <option :value="deg.value" v-for="deg in degrees">{{deg.name}}</option>
-            </select>
-          </div>
+<!--          <div id="second_row">-->
+<!--            <select name="semester" size="1" id="semester" class="parameter" v-model="selected_semester">-->
+<!--              <option selected>Semester</option>-->
+<!--              <option :value="semester.value" v-for="semester in semesters">{{semester.name}}</option>-->
+<!--            </select>-->
+<!--            <select name="profile" size="1" id="profile" class="parameter" v-model="selected_profile">-->
+<!--              <option selected>Profile</option>-->
+<!--              <option :value="profile.value" v-for="profile in profiles">{{profile.name}}</option>-->
+<!--            </select>-->
+<!--            <select name="degree" size="1" id="degree" class="parameter" v-model="selected_degree">-->
+<!--              <option selected>Degree</option>-->
+<!--              <option :value="deg.value" v-for="deg in degrees">{{deg.name}}</option>-->
+<!--            </select>-->
+<!--          </div>-->
         </form>
       </div>
-      <course_info v-for="cd in filtered_course_descriptions" :course_name=cd.name :course_description="cd.desc"></course_info>
+      <course_info v-for="cd in filtered_course_descriptions" :course_name=cd ></course_info>
     </div>
     <script src="{% static 'courses_list/courses_list_script.js' %}" type="text/javascript"></script>
   </body>
