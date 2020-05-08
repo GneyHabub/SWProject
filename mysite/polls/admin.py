@@ -123,7 +123,8 @@ class PollAdmin(nested_admin.NestedModelAdmin):
         (None, {'fields': ['poll_name']}),
         ('Date information', {'fields': ['pub_date']}),
         ('Available dates', {'fields': ['open_date', 'close_date']}),
-        ('Connection with Prof', {'fields': ['teachers']})
+        ('Connection with Prof', {'fields': ['teachers']}),
+        ('Is from default poll', {'fields': ['is_from_default']})
     ]
     inlines = [QuestionInline]
     list_display = ('poll_name', 'pub_date', 'open_date', 'close_date', 'teachers')

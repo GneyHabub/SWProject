@@ -191,10 +191,76 @@ def analytics_render(request, prof_id):
     return render(request, 'analytics/analytics.html')
 
 
-def analytics():
-    pass
+def calculate_answers(lst, value):
+    return sum(list(Choice.objects.filter(question__in=lst).filter(choice_text=value).values_list('votes', flat=True)))
 
-# todo serialize
+
+def calculate_avg_grade(lst):
+    total_num = 0
+    total_sum = 0
+    for i in range(1,6):
+        s = calculate_answers(lst, str(i))
+        total_num += s
+        total_sum += s*i
+    if total_num > 0:
+        return total_sum/total_num
+    else:
+        return 0
+
+
+def analytics_help(courses, teaches):
+    course_year = list()
+    course_grade = list()
+    teaches_courses = [t[0] for t in teaches]
+
+    for c in courses:
+        indexes = [str(teaches[i][3]) for i, val in enumerate(teaches_courses) if val == c[1]]
+        polls = list(Poll.objects.filter(teachers__in=indexes).filter(is_from_default=True).values_list('id'))
+        questions = list(Question.objects.filter(poll__in=polls).
+                         filter(question_text__in=['Estimate the course - overall',
+                                                   'Estimate the course - labs',
+                                                   'Estimate the course - lectures & tutorials']).
+                         values_list('id'))
+
+        av_grade = calculate_avg_grade(questions)
+        course_grade.append({c[0]: str(av_grade)})
+        years = set([teaches[i][1] for i, val in enumerate(teaches_courses) if val == c[1]])
+        for y in years:
+            year_idxs = [i for i, val in enumerate(teaches) if (val[1] == y and val[0] == c[1])]
+            year_polls = list(Poll.objects.filter(teachers__in=year_idxs).
+                              filter(is_from_default=True).values_list('id'))
+            year_questions = list(Question.objects.filter(poll__in=year_polls).
+                                  filter(question_text__in=['Estimate the course - overall',
+                                                            'Estimate the course - labs',
+                                                            'Estimate the course - lectures & tutorials']).
+                                  values_list('id'))
+            av_grade_y = calculate_avg_grade(year_questions)
+            year_grade = {c[0]: str(av_grade_y)}
+            course_year.append({y: year_grade})
+
+    return {'COURSE_GRADE': course_grade, 'YEAR_GRADE': course_year}
+
+
+@api_view(('GET',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def analytics(request, prof_id):
+    if request.method == 'GET':
+        user = CustomUser.objects.get(pk=prof_id)
+        course_year = list()
+        course_grade = list()
+        if user.is_prof:
+            teaches = list(Teaches.objects.filter(prof=prof_id).values_list('course', 'year', 'is_fall', 'id'))
+            teachers_id = [i[3] for i in teaches]
+            courses = set(Course.objects.filter(teaches__in=teachers_id).values_list('title', 'id'))
+            res = analytics_help(courses, teaches)
+            return JsonResponse({'PROF': res})
+        else:
+            courses = set(Course.objects.all().values_list('title', 'id'))
+            teaches = list(Teaches.objects.all().values_list('course', 'year', 'is_fall', 'id'))
+            res = analytics_help(courses, teaches)
+            return JsonResponse({'DOE': res})
+
+
 @api_view(('GET',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def surveys_list(request, prof_id):
