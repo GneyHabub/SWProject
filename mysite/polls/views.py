@@ -286,13 +286,22 @@ def surveys_list(request, prof_id):
 
 
 def export_poll(request, poll_id):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="poll.csv"'
-    writer = csv.writer(response)
-    for question in Poll.objects.get(pk=poll_id).question_set.all():
-        writer.writerow([question.question_text, question.type])
-        choices = question.choice_set.all().values_list('choice_text', 'votes')
-        for choice in choices:
-            writer.writerow(choice)
-
+    user = request.user
+    if(not user.is_authenticated):
+        response = HttpResponse('you have to log in first')
+    elif(user.is_doe | user.is_prof):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="poll%d.csv"' % poll_id
+        writer = csv.writer(response)
+        writer.writerow(['question text', 'question type'])
+        writer.writerow(['choice(s) text', 'votes'])
+        writer.writerow([])
+        for question in Poll.objects.get(pk=poll_id).question_set.all():
+            writer.writerow([question.question_text, question.type])
+            choices = question.choice_set.all().values_list('choice_text', 'votes')
+            for choice in choices:
+                writer.writerow(choice)
+            writer.writerow([])
+    else:
+        response = HttpResponse("you don't have perisson to export data")    
     return response
