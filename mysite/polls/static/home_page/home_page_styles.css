@@ -1,63 +1,44 @@
 .main_body {
   height: 100%;
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
-  -ms-grid-rows: auto;
-      grid-template-rows: auto;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  align-items: stretch;
 }
 
 nav {
   display: none;
   background-color: white;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-shadow: 5px 5px 5px darkgray;
-          box-shadow: 5px 5px 5px darkgray;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 5px 5px 5px darkgray;
   height: 100vh;
   width: 17vw;
   left: 0;
 }
-
 nav button {
   height: 60px;
   width: 80%;
 }
-
 @media (max-width: 850px) {
   nav button {
     font-size: 14px;
   }
 }
-
+nav a {
+  width: 80%;
+}
 nav .icon_and_name {
   margin: 20px;
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
   justify-items: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 nav .icon_and_name h2 {
   font-size: 15px;
 }
-
 nav .icon_and_name .icon_image {
   height: 70px;
   width: 70px;
@@ -66,8 +47,7 @@ nav .icon_and_name .icon_image {
 .default_ranking {
   width: 80%;
   height: 70%;
-  -ms-grid-column-align: center;
-      justify-self: center;
+  justify-self: center;
 }
 
 .on_scroll {
@@ -84,7 +64,6 @@ nav .icon_and_name .icon_image {
     height: 40px;
   }
 }
-
 .green_stripe button {
   background-color: inherit;
   height: 50px;
@@ -92,18 +71,17 @@ nav .icon_and_name .icon_image {
   margin: 0;
   padding: 0;
 }
-
 @media (max-width: 850px) {
   .green_stripe button {
     height: 30px;
     width: 30px;
   }
 }
-
 @media (max-width: 850px) {
   .green_stripe button img {
     height: 30px;
     width: 30px;
   }
 }
+
 /*# sourceMappingURL=home_page_styles.css.map */

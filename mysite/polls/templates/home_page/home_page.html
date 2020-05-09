@@ -11,122 +11,120 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
-    <header>
-        <div class="green_stripe">
-            <button id="sidebar"><img src="{% static 'home_page/images/sidebar.png' %}" height="50" width="50"/></button>
-            <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
-        </div>
-    </header>
-    <div class="main_body">
-        <nav id="nav">
-            <div class="icon_and_name">
-                <img src="{{ user.photo.url }}"  alt="Corgi" class="icon_image">
-                <h2>{{user.name}} {{user.surname}}</h2>
-            </div>
-            <button id="to_courses">
-                <a href="{% url 'polls:course_list_render' prof_id=user.id %}">Courses</a>
-            </button>
-
-            <button id="to_analytics">
-                <a href="{% url 'polls:analytics_render' prof_id=user.id %}">Analytics</a>
-            </button>
-            <button id="to_surveys">
-                <a href="{% url 'polls:surveys_list_render' prof_id=user.id %}">Surveys</a>
-            </button>
-            <button id="to_constructor">
-                <a href="{% url 'polls:analytics_render' prof_id=user.id %}">Create new survey</a>
-            </button>
-        </nav>
-        <div class="default_ranking" style="position: relative; height:40vh; width:70vw">
-            <canvas id="myChart"></canvas>
-            <canvas id="myChart1"></canvas>
-            <script>
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['1', '2', '3', '4', '5', '6'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [1, 2, 4, 8, 16, 32],
-                            backgroundColor: [
-                                'rgba(255,28,31,0.35)'
-                            ],
-                            borderColor: [
-                                'rgb(246,14,34)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        lineTension: 0.1,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
-                });
-                var ctx1 = document.getElementById('myChart1').getContext('2d');
-                var myChart1 = new Chart(ctx1 , {
-                    type: 'line',
-                    data: {
-                        labels: ['1', '2', '3', '4', '5', '6', '7'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [16, 4, 2, 1, 2, 4, 16],
-                            backgroundColor: [
-                                'rgba(82,73,255,0.35)'
-                            ],
-                            borderColor: [
-                                'rgb(3,0,246)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        lineTension: 0.1,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
-                });
-            </script>
-        </div>
+<header>
+    <div class="green_stripe">
+        <button id="sidebar"><img src="{% static 'home_page/images/sidebar.png' %}" height="50" width="50"/></button>
+        <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
     </div>
-    <script>
-
-        let sidebar_flag = false;
-        document.getElementById("sidebar").addEventListener("click", function () {
-            if (!sidebar_flag){
-                document.getElementById("nav").style.display = "flex";
-                sidebar_flag = true;
-                document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr 4fr";
-                window.onscroll = function() {myFunction()};
-                let sidebar = document.getElementById("nav");
-                let main_body = document.getElementsByClassName("default_ranking")[0];
-                function myFunction() {
-                    if (window.pageYOffset > 70) {
-                        sidebar.classList.add("on_scroll");
-                        main_body.classList.add("main_body_on_scroll");
-                    } else {
-                        sidebar.classList.remove("on_scroll");
-                        main_body.classList.remove("main_body_on_scroll");
+</header>
+<div class="main_body">
+    <nav id="nav">
+        <div class="icon_and_name">
+            <img src="{{ user.photo.url }}"  alt="Corgi" class="icon_image">
+            <h2>{{user.name}} {{user.surname}}</h2>
+        </div>
+        <a href="{% url 'polls:course_list_render' prof_id=user.id %}">
+            <button id="to_courses">Courses</button>
+        </a>
+        <a href="{% url 'polls:analytics_render' prof_id=user.id %}">
+            <button id="to_analytics">Analytics</button>
+        </a>
+        <a href="{% url 'polls:surveys_list_render' prof_id=user.id %}">
+            <button id="to_surveys">Surveys</button>
+        </a>
+        <a href="{% url 'polls:analytics_render' prof_id=user.id %}">
+            <button id="to_constructor">Create new survey</button>
+        </a>
+    </nav>
+    <div class="default_ranking" style="position: relative; height:40vh; width:70vw">
+        <canvas id="myChart"></canvas>
+        <canvas id="myChart1"></canvas>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1', '2', '3', '4', '5', '6'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [1, 2, 4, 8, 16, 32],
+                        backgroundColor: [
+                            'rgba(255,28,31,0.35)'
+                        ],
+                        borderColor: [
+                            'rgb(246,14,34)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    lineTension: 0.1,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
                     }
                 }
-            } else {
-                document.getElementById("nav").style.display = "none";
-                sidebar_flag = false;
-                document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr";
-                window.onscroll = null;
+            });
+            var ctx1 = document.getElementById('myChart1').getContext('2d');
+            var myChart1 = new Chart(ctx1 , {
+                type: 'line',
+                data: {
+                    labels: ['1', '2', '3', '4', '5', '6', '7'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [16, 4, 2, 1, 2, 4, 16],
+                        backgroundColor: [
+                            'rgba(82,73,255,0.35)'
+                        ],
+                        borderColor: [
+                            'rgb(3,0,246)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    lineTension: 0.1,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+    </div>
+</div>
+<script>
+    let sidebar_flag = false;
+    document.getElementById("sidebar").addEventListener("click", function () {
+        if (!sidebar_flag){
+            document.getElementById("nav").style.display = "flex";
+            sidebar_flag = true;
+            document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr 4fr";
+            window.onscroll = function() {myFunction()};
+            let sidebar = document.getElementById("nav");
+            let main_body = document.getElementsByClassName("default_ranking")[0];
+            function myFunction() {
+                if (window.pageYOffset > 70) {
+                    sidebar.classList.add("on_scroll");
+                    main_body.classList.add("main_body_on_scroll");
+                } else {
+                    sidebar.classList.remove("on_scroll");
+                    main_body.classList.remove("main_body_on_scroll");
+                }
             }
-        });
-    </script>
+        } else {
+            document.getElementById("nav").style.display = "none";
+            sidebar_flag = false;
+            document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr";
+            window.onscroll = null;
+        }
+    });
+</script>
 </body>
 </html>

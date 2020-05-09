@@ -14,10 +14,3 @@ for (let item in data){
         data[item].push(Math.floor(40 + Math.random()*60))
     }
 }
-
-fetch('https://dog.ceo/api/breeds/image/random').then((result) => {
-    return result.json();
-}).then((res) => {
-    console.log(res);
-    document.getElementById("doggo").src = res.message;
-});
