@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    'polls',
+    'nested_admin',
+    # 'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,17 +80,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'assessment',
-        'USER': 'postgres',
-        'PASSWORD': '4682',
-        'HOST': '10.90.136.59',
-        'PORT': '5432',
+        'NAME': 'polls',
+	'USER': 'django_user',
+	'PASSWORD': '10Bobrov', 
+	'HOST': '127.0.0.1',
+	'PORT': '5432',
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'polls.CustomUser'
+
+AUTHENTICATION_BACKENDS = (
+    'polls.auth.AuthBackend',
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/style.css">
-    <link rel="stylesheet" href="../../static/home_page/home_page_styles.css">
-    <link rel="stylesheet" href="../../static/home_page/home_page_styles_mobile.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'home_page/home_page_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'home_page/home_page_styles_mobile.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
     <header>
         <div class="green_stripe">
-            <h3><a href="https://random.dog/">Log out</a></h3>
+            <button id="sidebar"><img src="{% static 'home_page/images/sidebar.png' %}" height="50" width="50"/></button>
+            <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
         </div>
     </header>
     <div class="main_body">
         <nav id="nav">
             <div class="icon_and_name">
-                <img src="https://i.pinimg.com/originals/b0/26/c7/b026c7f98aa6de974e9698e08c32e6cf.png" alt="Corgi" class="icon_image">
-                <h2>Vladimir Putin</h2>
+                <img src="{{ user.photo.url }}"  alt="Corgi" class="icon_image">
+                <h2>{{user.name}} {{user.surname}}</h2>
             </div>
-            <button id="to_courses">Courses</button>
-            <button id="to_analytics">Analytics</button>
-            <button id="to_surveys">Surveys</button>
-            <button id="to_constructor">Create new survey</button>
+            <button id="to_courses">
+                <a href="{% url 'polls:course_list_render' prof_id=user.id %}">Courses</a>
+            </button>
+
+            <button id="to_analytics">
+                <a href="{% url 'polls:analytics_render' prof_id=user.id %}">Analytics</a>
+            </button>
+            <button id="to_surveys">
+                <a href="{% url 'polls:surveys_list_render' prof_id=user.id %}">Surveys</a>
+            </button>
+            <button id="to_constructor">
+                <a href="{% url 'polls:analytics_render' prof_id=user.id %}">Create new survey</a>
+            </button>
         </nav>
         <div class="default_ranking" style="position: relative; height:40vh; width:70vw">
             <canvas id="myChart"></canvas>
@@ -59,7 +70,7 @@
                     }
                 });
                 var ctx1 = document.getElementById('myChart1').getContext('2d');
-                var myChart1 = new Chart(ctx1, {
+                var myChart1 = new Chart(ctx1 , {
                     type: 'line',
                     data: {
                         labels: ['1', '2', '3', '4', '5', '6', '7'],
@@ -90,18 +101,32 @@
         </div>
     </div>
     <script>
-        window.onscroll = function() {myFunction()};
-        let sidebar = document.getElementById("nav");
-        let main_body = document.getElementsByClassName("default_ranking")[0];
-        function myFunction() {
-            if (window.pageYOffset > 70) {
-                sidebar.classList.add("on_scroll");
-                main_body.classList.add("main_body_on_scroll");
+
+        let sidebar_flag = false;
+        document.getElementById("sidebar").addEventListener("click", function () {
+            if (!sidebar_flag){
+                document.getElementById("nav").style.display = "flex";
+                sidebar_flag = true;
+                document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr 4fr";
+                window.onscroll = function() {myFunction()};
+                let sidebar = document.getElementById("nav");
+                let main_body = document.getElementsByClassName("default_ranking")[0];
+                function myFunction() {
+                    if (window.pageYOffset > 70) {
+                        sidebar.classList.add("on_scroll");
+                        main_body.classList.add("main_body_on_scroll");
+                    } else {
+                        sidebar.classList.remove("on_scroll");
+                        main_body.classList.remove("main_body_on_scroll");
+                    }
+                }
             } else {
-                sidebar.classList.remove("on_scroll");
-                main_body.classList.remove("main_body_on_scroll");
+                document.getElementById("nav").style.display = "none";
+                sidebar_flag = false;
+                document.getElementsByClassName("main_body")[0].style.gridTemplateColumns = "1fr";
+                window.onscroll = null;
             }
-        }
+        });
     </script>
 </body>
 </html>

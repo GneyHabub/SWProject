@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   {% load static %}
+    <meta charset="UTF-8" />
+    <title>Surveys</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'surveys_list/surveys_list_styles.css' %}" />
+  </head>
+  <body>
+    <header>
+      <div class="green_stripe">
+        <h3><a href="{% url 'polls:personal_page' user.id %}">My account</a></h3>
+        <h3 class="page_title">Surveys</h3>
+        <h3>
+          <a href="{% url 'polls:login_staff' %}" class="logout_link"
+            >Log out</a
+          >
+        </h3>
+      </div>
+    </header>
+
+    <!--
+    <header>
+      <div class="green_stripe">
+        <h3>Log out</h3>
+      </div>
+      <div class="white_stripe">
+        <h3>My account</h3>
+        <h3>Surveys</h3>
+      </div>
+    </header>
+-->
+    <div class="main_body">
+      <form>
+        <div class="search_field">
+          <div id="first_row">
+            <input type="search" id="search" />
+            <input type="submit" id="submit" value="Apply" />
+          </div>
+          <div id="second_row">
+            <select name="semester" size="1" id="semester" class="parameter">
+              <option selected>Semester</option>
+              <option value="spring20">Spring 2020</option>
+              <option value="fall19">Fall 2019</option>
+              <option value="spring19">Spring 2019</option>
+              <option value="fall18">Fall 2018</option>
+              <option value="spring18">Spring 2018</option>
+              <option value="fall17">Fall 2017</option>
+            </select>
+            <select name="profile" size="1" id="profile" class="parameter">
+              <option selected>Profile</option>
+              <option value="math">Math</option>
+              <option value="cs">Computer Science</option>
+              <option value="physics">Physics</option>
+              <option value="english">English</option>
+              <option value="hum">Hum Elective</option>
+            </select>
+            <select name="degree" size="1" id="degree" class="parameter">
+              <option selected>Degree</option>
+              <option value="bachelor">Bachelor</option>
+              <option value="master">Master</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="survey_info">
+        <h2>[ID]</h2>
+        <h2>Survey_name</h2>
+      </div>
+    </div>
+  </body>
+</html>

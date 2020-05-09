@@ -15,10 +15,20 @@ Including another URLconf
 """
 #from django.contrib import admin
 #from django.urls import path
+from . import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    re_path(r'^nested_admin/', include('nested_admin.urls')),
 ]
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns = patterns('',
+#     # ...
+#     url(r'^nested_admin/', include('nested_admin.urls')),
+# )

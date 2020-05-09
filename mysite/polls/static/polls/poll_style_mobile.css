@@ -10,6 +10,7 @@
     width: 100px;
   }
 }
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
   .white_stripe .survey_number {
     font-size: 35px;
@@ -21,6 +22,7 @@
     font-size: 40px;
   }
 }
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
   .poll_title .poll_subtitle {
     font-size: 30px;
@@ -44,11 +46,25 @@
     font-size: 45px;
   }
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .radio_option input[type=radio] {
+    border: 0;
+    width: 3em;
+    height: 3em;
+  }
+}
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
   .radio_option {
     font-size: 30px;
-    flex-direction: column;
-    align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
 }
 
@@ -87,5 +103,4 @@
     font-size: 20px;
   }
 }
-
 /*# sourceMappingURL=poll_style_mobile.css.map */

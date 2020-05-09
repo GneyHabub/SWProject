@@ -32,20 +32,27 @@ button:hover {
 }
 
 .green_stripe {
+    color: #0D3911;
     background-color: #4EA952;
     padding: 10px 40px;
     height: 70px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
+
 .green_stripe h3 {
-    align-self: flex-end;
+    align-self: center;
     font-size: 17px;
     margin: 4px;
 }
 .green_stripe h3 a {
     color: #0D3911;
+}
+
+.green_stripe .page_title {
+    margin-right: auto;
+    margin-left: 5%;
 }
 
 .icon_image{
