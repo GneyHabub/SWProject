@@ -20,7 +20,7 @@ from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from rest_framework.decorators import api_view, renderer_classes
 
-
+import csv
 
 def custom_logout(request):
     logout(request)
@@ -284,3 +284,15 @@ def surveys_list(request, prof_id):
                             'open_date': s[1], 'close_date': s[2]})
     return JsonResponse({'SURVEYS ': res})
 
+
+def export_poll(request, poll_id):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="poll.csv"'
+    writer = csv.writer(response)
+    for question in Poll.objects.get(pk=poll_id).question_set.all():
+        writer.writerow([question.question_text, question.type])
+        choices = question.choice_set.all().values_list('choice_text', 'votes')
+        for choice in choices:
+            writer.writerow(choice)
+
+    return response

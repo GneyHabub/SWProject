@@ -13,6 +13,7 @@ urlpatterns = [
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     url('thank_you_page/', views.thank_you, name='thank_you_page'),
     path('<int:poll_id>/vote/', views.vote_poll, name='vote'),
+    path('<int:poll_id>/export/', views.export_poll, name='export'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     url(r'^login_staff/$', views.staff_login, name='login_staff'),
     url(r'^login_student/$', views.student_login, name='login_student'),
