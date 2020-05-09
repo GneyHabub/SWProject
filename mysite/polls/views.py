@@ -271,18 +271,18 @@ def surveys_list(request, prof_id):
             teaches_query = list(Teaches.objects.filter(prof=prof_id).values_list('id', 'year', 'is_fall'))
             teaches_id = [i[0] for i in teaches_query]
             surveys = list(Poll.objects.filter(teachers__in=teaches_id).
-                           values_list('poll_name', 'open_date', 'close_date', 'teachers'))
+                           values_list('poll_name', 'open_date', 'close_date', 'teachers', 'id'))
             for s in surveys:
                 teaches_rel = teaches_query[teaches_id.index(s[3])]
                 res.append({'poll_title': s[0], 'year': teaches_rel[1], 'semester': teaches_rel[2],
-                            'open_date': s[1], 'close_date': s[2]})
+                            'open_date': s[1], 'close_date': s[2], 'poll_id':s[4]})
         else:
             surveys = list(Poll.objects.values_list('poll_name', 'open_date', 'close_date', 'teachers'))
             for s in surveys:
                 teaches_rel = list(Teaches.objects.filter(id=s[3]).values_list('id', 'year', 'is_fall'))[0]
                 res.append({'poll_title': s[0], 'year': teaches_rel[1], 'semester': teaches_rel[2],
-                            'open_date': s[1], 'close_date': s[2]})
-    return JsonResponse({'SURVEYS ': res})
+                            'open_date': s[1], 'close_date': s[2], 'poll_id':s[4]})
+    return JsonResponse({'SURVEYS': res})
 
 
 def export_poll(request, poll_id):
@@ -291,7 +291,7 @@ def export_poll(request, poll_id):
         response = HttpResponse('you have to log in first')
     elif(user.is_doe | user.is_prof):
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="poll%d.csv"' % poll_id
+        response['Content-Disposition'] = 'attachment; filename="poll%d.csv"' % int(poll_id)
         writer = csv.writer(response)
         writer.writerow(['question text', 'question type'])
         writer.writerow(['choice(s) text', 'votes'])
@@ -305,3 +305,31 @@ def export_poll(request, poll_id):
     else:
         response = HttpResponse("you don't have perisson to export data")    
     return response
+
+
+def ranking(request, user_id):
+    if request.method == 'GET':
+        profs = list(CustomUser.objects.filter(is_prof=True).values_list('name', 'surname', 'id'))
+        n = -1
+        top = list()
+        for p in profs:
+            teaches_id = list(Teaches.objects.filter(prof=p[2]).values_list('id', flat=True))
+            polls = list(Poll.objects.filter(teachers__in=teaches_id).filter(is_from_default=True).
+                           values_list('id', flat=True))
+            questions = list(Question.objects.filter(poll__in=polls).
+                             filter(question_text__in=['Estimate the course - overall',
+                                                       'Estimate the course - labs',
+                                                       'Estimate the course - lectures & tutorials']).
+                             values_list('id'))
+
+            av_grade = calculate_avg_grade(questions)
+            top.append({'id': p[2], 'grade': av_grade, 'name': p[0]+" "+p[1]})
+        sorted_top = sorted(top, key=lambda k: k['grade'])
+        cleaned_top = list()
+        for i in range(min(10, len(sorted_top))):
+            cleaned_top.append({str(i+1): sorted_top[i]['name']})
+        user = CustomUser.objects.get(pk=user_id)
+        if user.is_prof:
+            n = next((index for (index, d) in enumerate(sorted_top) if d['id'] == int(user_id)), None)+1
+
+    return JsonResponse({'PLACE': n, 'TOP': cleaned_top[:10]})
