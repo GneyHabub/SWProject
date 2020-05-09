@@ -192,6 +192,7 @@ def analytics_render(request, prof_id):
 
 
 def calculate_answers(lst, value):
+    print(list(Choice.objects.filter(question__in=lst).filter(choice_text=value).values_list('votes', flat=True)))
     return sum(list(Choice.objects.filter(question__in=lst).filter(choice_text=value).values_list('votes', flat=True)))
 
 
@@ -202,6 +203,8 @@ def calculate_avg_grade(lst):
         s = calculate_answers(lst, str(i))
         total_num += s
         total_sum += s*i
+    print("total num ", total_num)
+    print("total sum ", total_sum)
     if total_num > 0:
         return total_sum/total_num
     else:
@@ -227,6 +230,7 @@ def analytics_help(courses, teaches):
         years = set([teaches[i][1] for i, val in enumerate(teaches_courses) if val == c[1]])
         for y in years:
             year_idxs = [i for i, val in enumerate(teaches) if (val[1] == y and val[0] == c[1])]
+            year_idxs = [teaches[i][3] for i in year_idxs]
             year_polls = list(Poll.objects.filter(teachers__in=year_idxs).
                               filter(is_from_default=True).values_list('id'))
             year_questions = list(Question.objects.filter(poll__in=year_polls).
@@ -246,8 +250,6 @@ def analytics_help(courses, teaches):
 def analytics(request, prof_id):
     if request.method == 'GET':
         user = CustomUser.objects.get(pk=prof_id)
-        course_year = list()
-        course_grade = list()
         if user.is_prof:
             teaches = list(Teaches.objects.filter(prof=prof_id).values_list('course', 'year', 'is_fall', 'id'))
             teachers_id = [i[3] for i in teaches]
