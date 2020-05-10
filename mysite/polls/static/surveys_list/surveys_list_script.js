@@ -1,10 +1,11 @@
-Vue.component('course_info', {
+Vue.component('survey_info', {
     template: `
         <div class="course_info">
-            <h2 @click="load">{{course_name}}</h2>
+            <h2 @click="load">{{survey_name.poll_title}}</h2>
+            <p @click="load">{{survey_name.year}}</p>
         </div>`,
     props: {
-        course_name:{
+        survey_name:{
             type: "String",
             required: true,
             default: "Course Name"
@@ -15,14 +16,14 @@ Vue.component('course_info', {
             window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         }
     }
-})
+});
 
 
 new Vue({
     el: "#app",
-    data: function(){ 
+    data: function(){
         return{
-            courses: [],
+            surveys: [],
             profiles: [
                 {
                     name: "Math",
@@ -51,13 +52,13 @@ new Vue({
             ],
             selected_degree: "Degree",
             filter_query: ""
-        } 
+        }
     },
     computed: {
         filtered_course_descriptions() {
-            let res = this.courses;
+            let res = this.surveys;
             let filter = new RegExp(this.filter_query, "i");
-            res = res.filter(course => course["NAME"].match(filter));
+            res = res.filter(survey => survey.poll_title.match(filter));
             return res;
         }
     },
@@ -74,8 +75,7 @@ new Vue({
         fetch(url).then(res => {
             return res.json();
         }).then(res => {
-            this.courses = res["COURSES"];
-            console.log(this.courses);
+            this.surveys = res["SURVEYS"];
         })
     }
 });
