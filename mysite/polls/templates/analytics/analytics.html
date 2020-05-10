@@ -19,8 +19,16 @@
         </div>
     </header>
     <div id="app">
-        <canvas id="chart"></canvas>
+        <div class="canvas_wrapper">
+            <h1>Average grade per course</h1>
+            <canvas id="chart1"></canvas>
+        </div>
+        <div class="canvas_wrapper">
+            <h1>Average grade per course each year</h1>
+            <canvas id="chart2"></canvas>
+        </div>
     </div>
+    <footer></footer>
     <script src="{% static 'analytics/analytics_script.js' %}"></script>
 </body>
 </html>
