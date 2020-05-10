@@ -22,18 +22,6 @@
     <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
   </div>
 </header>
-
-<!--
-    <header>
-      <div class="green_stripe">
-        <h3>Log out</h3>
-      </div>
-      <div class="white_stripe">
-        <h3>My account</h3>
-        <h3>Surveys</h3>
-      </div>
-    </header>
--->
 <div class="main_body" id="app">
   <div class="search_field">
     <form>
@@ -41,23 +29,11 @@
         <input type="search" id="search" v-model="filter_query"/>
         <input type="button" value="Reset" @click="reset_filter"/>
       </div>
-      <!--          <div id="second_row">-->
-      <!--            <select name="semester" size="1" id="semester" class="parameter" v-model="selected_semester">-->
-      <!--              <option selected>Semester</option>-->
-      <!--              <option :value="semester.value" v-for="semester in semesters">{{semester.name}}</option>-->
-      <!--            </select>-->
-      <!--            <select name="profile" size="1" id="profile" class="parameter" v-model="selected_profile">-->
-      <!--              <option selected>Profile</option>-->
-      <!--              <option :value="profile.value" v-for="profile in profiles">{{profile.name}}</option>-->
-      <!--            </select>-->
-      <!--            <select name="degree" size="1" id="degree" class="parameter" v-model="selected_degree">-->
-      <!--              <option selected>Degree</option>-->
-      <!--              <option :value="deg.value" v-for="deg in degrees">{{deg.name}}</option>-->
-      <!--            </select>-->
-      <!--          </div>-->
     </form>
   </div>
-  <survey_info v-for="cd in filtered_course_descriptions" :survey_name=cd :key="cd.poll_title"></survey_info>
+  <div class="list_wrapper">
+    <survey_info v-for="cd in filtered_course_descriptions" :survey_name=cd :key="cd.poll_title"></survey_info>
+  </div>
 </div>
 <script src="{% static 'surveys_list/surveys_list_script.js' %}" type="text/javascript"></script>
 </body>

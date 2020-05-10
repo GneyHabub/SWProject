@@ -28,6 +28,9 @@
         <a href="{% url 'polls:course_list_render' prof_id=user.id %}">
             <button id="to_courses">Courses</button>
         </a>
+        <a href="{% url 'polls:analytics_render' prof_id=user.id %}">
+            <button id="to_analytics">Analytics</button>
+        </a>
         <a href="{% url 'polls:surveys_list_render' prof_id=user.id %}">
             <button id="to_surveys">Surveys</button>
         </a>
@@ -42,7 +45,7 @@
                 <rank_item  :prof_name="i.name"></rank_item>
             </li>
         </ol>
-        <profs_place :place="place"></profs_place>
+        <profs_place v-if="place" :place="place"></profs_place>
 
     </div>
 </div>

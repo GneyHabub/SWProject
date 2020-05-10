@@ -75,9 +75,7 @@ new Vue({
         fetch(url).then(res => {
             return res.json();
         }).then(res => {
-            console.log(res);
-            this.surveys = res["SURVEYS "];
-            console.log(this.surveys);
+            this.surveys = res["SURVEYS"];
         })
     }
 });

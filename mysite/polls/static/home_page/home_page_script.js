@@ -50,11 +50,13 @@ new Vue({
             return res.json();
         }).then(res => {
             this.profs_top = res["TOP"];
-            this.place = res["PLACE"];
-            this.top_length = this.profs_top.length;
-            for (let i =0; i<this.profs_top.length; i++){
-                console.log(this.profs_top[i].name);
+            if (res["PLACE"] !== -1) {
+                this.place = res["PLACE"];
+            } else {
+                this.place = null;
             }
+            this.top_length = this.profs_top.length;
+
         })
     }
 });
