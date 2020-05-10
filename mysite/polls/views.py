@@ -175,7 +175,6 @@ def course_list(request, prof_id):
             courses = list(Course.objects.filter(id__in=courses_id).values_list('title', flat=True))
         else:
             courses = list(Course.objects.all().values_list('title', flat=True))
-    # print({"COURSES": courses})
     return JsonResponse({"COURSES": courses})
 
 
@@ -192,7 +191,6 @@ def analytics_render(request, prof_id):
 
 
 def calculate_answers(lst, value):
-    print(list(Choice.objects.filter(question__in=lst).filter(choice_text=value).values_list('votes', flat=True)))
     return sum(list(Choice.objects.filter(question__in=lst).filter(choice_text=value).values_list('votes', flat=True)))
 
 
@@ -203,8 +201,6 @@ def calculate_avg_grade(lst):
         s = calculate_answers(lst, str(i))
         total_num += s
         total_sum += s*i
-    print("total num ", total_num)
-    print("total sum ", total_sum)
     if total_num > 0:
         return total_sum/total_num
     else:
@@ -329,7 +325,7 @@ def ranking(request, user_id):
         sorted_top = sorted(top, key=lambda k: k['grade'])
         cleaned_top = list()
         for i in range(min(10, len(sorted_top))):
-            cleaned_top.append({str(i+1): sorted_top[i]['name']})
+            cleaned_top.append(sorted_top[i]['name'])
         user = CustomUser.objects.get(pk=user_id)
         if user.is_prof:
             n = next((index for (index, d) in enumerate(sorted_top) if d['id'] == int(user_id)), None)+1
