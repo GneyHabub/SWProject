@@ -1,15 +1,21 @@
 Vue.component('survey_info', {
     template: `
-        <div class="course_info">
-            <h2 @click="load">{{survey.poll_title}}</h2>
+        <div class="survey_info">
+            <h2 >{{survey.poll_title}}</h2>
+            <a :href="csv_link">
+                <button>Download results in CSV</button>
+            </a>
             <div class="date_semester_wrapper">
                 <p>{{semester}}</p>
-                <p @click="load">{{survey.year}}</p>
+                <p>{{survey.year}}</p>
             </div>
         </div>`,
     data() {
         return {
             semester: {
+                type: "String"
+            },
+            csv_link: {
                 type: "String"
             }
         }
@@ -21,12 +27,8 @@ Vue.component('survey_info', {
         }
     },
     created() {
-        this.semester = this.survey.semester ? 'Fall' : 'Spring'
-    },
-    methods: {
-        load(){
-            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-        }
+        this.semester = this.survey.semester ? 'Fall' : 'Spring';
+        this.csv_link = "/polls/" + this.survey.poll_id + "/poll_export/"
     }
 });
 

@@ -44,20 +44,35 @@
     border: 1px solid #5E695F;
 }
 
-.course_info {
-    display: flex;
+.survey_info {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
     flex-direction: column;
     align-items: flex-start;
     color: #9C27B0;
     margin: 10px;
 }
 
-.course_info h2{
+.survey_info h2{
     cursor: pointer;
 }
 
-.course_info p{
+.survey_info p{
     cursor: pointer;
+}
+
+.survey_info a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 75%;
+    width: 100%;
+    text-decoration: none;
+}
+
+.survey_info a button{
+    font-size: 17px;
+    height: 100%;
 }
 
 input[type="button"]{
@@ -73,5 +88,5 @@ input[type="button"]{
 .date_semester_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    width: 20%;
 }
