@@ -2,3 +2,4 @@ Django
 django-nested-admin
 Pillow
 djangorestframework
+psycopg2-binary
