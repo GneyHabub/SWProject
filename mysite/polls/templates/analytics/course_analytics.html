@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    {% load static %}
+    <meta charset="UTF-8" />
     <title>Analytics</title>
+    <link
+            href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'analytics/course_style.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
 
+<header>
+    <div class="green_stripe">
+        <h3><a href="{% url 'polls:personal_page' user.id %}">My account</a></h3>
+        <h3 class="page_title">Courses</h3>
+        <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
+    </div>
+</header>
+<div>
+    SOSIHUI
+</div>
+<script src="{% static 'courses_list/courses_list_script.js' %}" type="text/javascript"></script>
 </body>
 </html>

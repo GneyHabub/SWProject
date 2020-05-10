@@ -1,21 +1,30 @@
 Vue.component('course_info', {
     template: `
         <div class="course_info">
-            <h2 @click="load">{{course_name}}</h2>
+            <a :href="analytics_url">{{course_info.NAME}}</a>
         </div>`,
-    props: {
-        course_name:{
-            type: "String",
-            required: true,
-            default: "Course Name"
+    data() {
+        return {
+            analytics_url: {
+                type: String
+            }
         }
+    },
+    props: {
+        course_info:{
+            type: Object,
+            required: true
+        }
+    },
+    created() {
+        this.analytics_url = window.location.href.slice(0, -8) + this.course_info["ID"] + "/single_course/"
     },
     methods: {
         load(){
             window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         }
     }
-})
+});
 
 
 new Vue({
@@ -75,7 +84,6 @@ new Vue({
             return res.json();
         }).then(res => {
             this.courses = res["COURSES"];
-            console.log(this.courses);
         })
     }
 });

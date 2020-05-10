@@ -48,12 +48,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: #9C27B0;
     margin: 10px;
 }
 
-.course_info h2{
+.course_info a{
+    color: #9C27B0;
+    font-size: 30px;
+    margin: 20px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .course_info p{
