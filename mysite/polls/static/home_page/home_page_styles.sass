@@ -22,12 +22,11 @@ nav
   box-shadow: $default_shadow
   height: 100vh
   width: 17vw
-  left: 0
   button
     @media (max-width: 850px)
       font-size: 14px
     height: 60px
-    width: 80%
+    width: 100%
   a
     width: 80%
   .icon_and_name
@@ -43,9 +42,32 @@ nav
       width: 70px
 
 .default_ranking
-  width: 80%
+  width: 60%
   height: 70%
   justify-self: center
+  ol
+    list-style: none
+    counter-reset: my-counter
+  ol li
+    font-size: 30px
+    counter-increment: my-counter
+    display: flex
+    div
+      margin-left: 15px
+  ol li::before
+    content: counter(my-counter) ". "
+    justify-self: center
+    align-self: center
+    font-size: 30px
+
+.default_ranking_header
+  font-size: 70px
+
+.profs_place_wrapper
+  display: flex
+  flex-direction: row
+  .profs_place_content
+    margin-left: 15px
 
 .on_scroll
   position: fixed

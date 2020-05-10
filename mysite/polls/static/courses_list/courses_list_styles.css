@@ -3,21 +3,31 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .search_field {
-    height: 100px;
-    width: 830px;
+    height: 70px;
+    width: 70%;
     max-width: 95%;
-    padding: 20px 50px;
+    padding: 20px;
     background-color: white;
     border-radius: 40px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
     flex-direction: column;
     justify-content: space-between;
-    align-self: center;
+
+}
+#first_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
+.list_wrapper {
+    margin-top: 50px;
+    width: 70%
+}
 .search_field #search {
     padding: 10px 20px;
     height: 30px;
