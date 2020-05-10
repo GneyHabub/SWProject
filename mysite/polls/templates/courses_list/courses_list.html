@@ -57,7 +57,7 @@
         </form>
       </div>
       <div class="list_wrapper">
-        <course_info v-for="cd in filtered_course_descriptions" :course_name=cd ></course_info>
+        <course_info v-for="cd in filtered_course_descriptions" :course_name=cd.NAME ></course_info>
       </div>
     </div>
     <script src="{% static 'courses_list/courses_list_script.js' %}" type="text/javascript"></script>

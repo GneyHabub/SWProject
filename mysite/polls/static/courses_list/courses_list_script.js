@@ -57,7 +57,7 @@ new Vue({
         filtered_course_descriptions() {
             let res = this.courses;
             let filter = new RegExp(this.filter_query, "i");
-            res = res.filter(course => course.match(filter));
+            res = res.filter(course => course["NAME"].match(filter));
             return res;
         }
     },
@@ -75,6 +75,7 @@ new Vue({
             return res.json();
         }).then(res => {
             this.courses = res["COURSES"];
+            console.log(this.courses);
         })
     }
 });
