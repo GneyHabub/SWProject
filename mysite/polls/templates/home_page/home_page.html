@@ -40,7 +40,7 @@
     </nav>
     <div id="app" class="default_ranking">
         <h1 class="default_ranking_header">Top 10 Profs of all time</h1>
-        <ol>
+        <ol class="ranking_list">
             <li v-for="i in profs_top" :key="i.name">
                 <rank_item  :prof_name="i.name"></rank_item>
             </li>

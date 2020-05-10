@@ -48,23 +48,47 @@ nav .icon_and_name .icon_image {
   height: 70%;
   justify-self: center;
 }
-.default_ranking ol {
+
+.ranking_list {
+  counter-reset: li;
   list-style: none;
-  counter-reset: my-counter;
+  font: 14px;
+  padding: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-.default_ranking ol li {
-  font-size: 30px;
-  counter-increment: my-counter;
-  display: flex;
+
+.ranking_list li {
+  position: relative;
+  display: block;
+  padding: 0.4em 0.4em 0.4em 2em;
+  margin: 0.5em 0;
+  background: #dad2ca;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0.3em;
+  transition: 0.3s ease-out;
 }
-.default_ranking ol li div {
-  margin-left: 15px;
+
+.ranking_list li:hover {
+  background: #e9e4e0;
 }
-.default_ranking ol li::before {
-  content: counter(my-counter) ". ";
-  justify-self: center;
-  align-self: center;
-  font-size: 30px;
+
+.ranking_list li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -1.3em;
+  top: 50%;
+  margin-top: -1.3em;
+  background: #4ea952;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  border: 0.3em solid white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 2em;
+  transition: all 0.3s ease-out;
 }
 
 .default_ranking_header {
