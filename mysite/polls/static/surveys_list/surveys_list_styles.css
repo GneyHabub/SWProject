@@ -2,55 +2,38 @@
     padding: 50px;
     display: flex;
     flex-direction: column;
-    /*align-items: center;*/
+    justify-content: center;
+    align-items: center;
 }
 
 .search_field {
-    height: 180px;
-    width: 830px;
+    height: 70px;
+    width: 70%;
     max-width: 95%;
-    padding: 20px 50px;
+    padding: 20px;
     background-color: white;
     border-radius: 40px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    display: flex;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    align-self: center;
-}
+    justify-content: space-between;
 
-.search_field #first_row {
+}
+#first_row {
     display: flex;
     flex-direction: row;
-    margin: 10px;
-    width: 100%;
+    justify-content: space-evenly;
 }
 
+.list_wrapper {
+    margin-top: 50px;
+    width: 70%
+}
 .search_field #search {
-    padding: 0px 10px;
-    margin: 0px 10px;
+    padding: 10px 20px;
     height: 30px;
     width: 80%;
     background-color: #d6d6d6;
     border: 1px solid #5E695F;
-}
-
-.search_field #submit {
-    height: 30px;
-    width: 90px;
-    background-color: #4EA952;
-    border: 1px solid #5E695F;
-}
-
-
-.search_field #second_row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin: 10px;
-    width: 100%;
 }
 
 .search_field .parameter {
@@ -61,10 +44,34 @@
     border: 1px solid #5E695F;
 }
 
-.survey_info {
+.course_info {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     color: #9C27B0;
-    margin: 30px;
+    margin: 10px;
+}
+
+.course_info h2{
+    cursor: pointer;
+}
+
+.course_info p{
+    cursor: pointer;
+}
+
+input[type="button"]{
+    height: 30px;
+    width: 90px;
+    background-color: #4EA952;
+    border: 1px solid #5E695F;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+}
+
+.date_semester_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
 }

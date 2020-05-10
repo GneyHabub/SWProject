@@ -1,15 +1,27 @@
 Vue.component('survey_info', {
     template: `
         <div class="course_info">
-            <h2 @click="load">{{survey_name.poll_title}}</h2>
-            <p @click="load">{{survey_name.year}}</p>
+            <h2 @click="load">{{survey.poll_title}}</h2>
+            <div class="date_semester_wrapper">
+                <p>{{semester}}</p>
+                <p @click="load">{{survey.year}}</p>
+            </div>
         </div>`,
-    props: {
-        survey_name:{
-            type: "String",
-            required: true,
-            default: "Course Name"
+    data() {
+        return {
+            semester: {
+                type: "String"
+            }
         }
+    },
+    props: {
+        survey:{
+            type: Object,
+            required: true
+        }
+    },
+    created() {
+        this.semester = this.survey.semester ? 'Fall' : 'Spring'
     },
     methods: {
         load(){
@@ -76,6 +88,7 @@ new Vue({
             return res.json();
         }).then(res => {
             this.surveys = res["SURVEYS"];
+            console.log(res);
         })
     }
 });

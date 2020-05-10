@@ -64,7 +64,6 @@ window.onload = () => {
                 }]
             },
             options: {
-                lineTension: 0,
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -80,7 +79,8 @@ window.onload = () => {
             type: 'line',
             data: {
                 labels: years,
-                datasets: datasets
+                datasets: datasets,
+
             },
             options: {
                 lineTension: 0,
