@@ -325,7 +325,7 @@ def ranking(request, user_id):
         sorted_top = sorted(top, key=lambda k: k['grade'])
         cleaned_top = list()
         for i in range(min(10, len(sorted_top))):
-            cleaned_top.append(sorted_top[i]['name'])
+            cleaned_top.append({'name': sorted_top[i]['name']})
         user = CustomUser.objects.get(pk=user_id)
         if user.is_prof:
             n = next((index for (index, d) in enumerate(sorted_top) if d['id'] == int(user_id)), None)+1
