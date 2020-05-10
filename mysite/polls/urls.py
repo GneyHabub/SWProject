@@ -31,7 +31,8 @@ urlpatterns = [
     url(r'(?P<poll_id>[0-9]+)/poll_export', views.export_poll, name='poll_export'),
     url(r'(?P<user_id>[0-9]+)/ranking/$', views.ranking, name='ranking'),
     url(r'(?P<user_id>[0-9]+)/(?P<course_id>[0-9]+)/subject_analytics/$', views.subject_analytics,
-        name='subject_analytics')
+        name='subject_analytics'),
+    url(r'single_course/', views.single_course, name='single_course')
 
 ]
 
