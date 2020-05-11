@@ -34,6 +34,7 @@
     width: 80%;
     background-color: #d6d6d6;
     border: 1px solid #5E695F;
+    font-size: 20px;
 }
 
 .search_field .parameter {
@@ -73,6 +74,7 @@
 .survey_info a button{
     font-size: 17px;
     height: 100%;
+    border-radius: 5px;
 }
 
 input[type="button"]{
