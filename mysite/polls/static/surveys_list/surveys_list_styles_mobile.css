@@ -45,4 +45,14 @@
         width: 90%;
     }
 
+    .survey_info a button{
+        font-size: 22px;
+        height: 100%;
+        width: 170px;
+    }
+
+    .date_semester_wrapper {
+        font-size: 20px;
+    }
+
 }
