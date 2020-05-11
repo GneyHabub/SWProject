@@ -18,11 +18,6 @@ Vue.component('course_info', {
     },
     created() {
         this.analytics_url = window.location.href.slice(0, -8) + this.course_info["ID"] + "/single_course/"
-    },
-    methods: {
-        load(){
-            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-        }
     }
 });
 
@@ -83,6 +78,7 @@ new Vue({
         fetch(url).then(res => {
             return res.json();
         }).then(res => {
+            console.log(url);
             this.courses = res["COURSES"];
         })
     }
