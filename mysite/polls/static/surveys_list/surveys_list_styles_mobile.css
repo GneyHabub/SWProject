@@ -1,0 +1,58 @@
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2) {
+ 
+    .green_stripe {
+        color: #0D3911;
+        background-color: #4EA952;
+        padding: 10px 40px;
+        height: 80px;
+        
+    }
+
+    .green_stripe h3 {
+        align-self: center;
+        font-size: 22px;
+        margin: 4px;
+    }
+
+    .search_field {
+        height: 80px;
+        width: 95%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 40px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .search_field #search {
+        padding: 10px 20px;
+        height: 40px;
+        width: 80%;
+        background-color: #d6d6d6;
+        border: 1px solid #5E695F;
+    }
+
+    input[type="button"] {
+        height: 40px;
+        width: 90px;
+        background-color: #4EA952;
+        border: 1px solid #5E695F;
+        cursor: pointer;
+        color: white;
+        font-size: 22px;
+    }
+
+    .list_wrapper {
+        width: 90%;
+    }
+
+    .survey_info a button{
+        font-size: 22px;
+        height: 100%;
+        width: 170px;
+    }
+
+    .date_semester_wrapper {
+        font-size: 20px;
+    }
+
+}

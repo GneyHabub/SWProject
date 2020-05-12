@@ -34,6 +34,7 @@
     width: 80%;
     background-color: #d6d6d6;
     border: 1px solid #5E695F;
+    font-size: 20px;
 }
 
 .search_field .parameter {
@@ -48,12 +49,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: #9C27B0;
     margin: 10px;
 }
 
-.course_info h2{
+.course_info a{
+    color: #9C27B0;
+    font-size: 30px;
+    margin: 20px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .course_info p{

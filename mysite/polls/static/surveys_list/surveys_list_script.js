@@ -1,20 +1,34 @@
 Vue.component('survey_info', {
     template: `
-        <div class="course_info">
-            <h2 @click="load">{{survey_name.poll_title}}</h2>
-            <p @click="load">{{survey_name.year}}</p>
+        <div class="survey_info">
+            <h2 >{{survey.poll_title}}</h2>
+            <a :href="csv_link">
+                <button>Download results in CSV</button>
+            </a>
+            <div class="date_semester_wrapper">
+                <p>{{semester}}</p>
+                <p>{{survey.year}}</p>
+            </div>
         </div>`,
-    props: {
-        survey_name:{
-            type: "String",
-            required: true,
-            default: "Course Name"
+    data() {
+        return {
+            semester: {
+                type: "String"
+            },
+            csv_link: {
+                type: "String"
+            }
         }
     },
-    methods: {
-        load(){
-            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    props: {
+        survey:{
+            type: Object,
+            required: true
         }
+    },
+    created() {
+        this.semester = this.survey.semester ? 'Fall' : 'Spring';
+        this.csv_link = "/polls/" + this.survey.poll_id + "/poll_export/"
     }
 });
 
@@ -76,6 +90,7 @@ new Vue({
             return res.json();
         }).then(res => {
             this.surveys = res["SURVEYS"];
+            console.log(res);
         })
     }
 });
