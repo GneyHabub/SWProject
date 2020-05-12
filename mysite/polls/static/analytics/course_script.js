@@ -12,7 +12,7 @@ window.onload = () => {
     fetch(url).then(res => {
         return res.json();
     }).then(res => {
-        console.log(res);
+        document.getElementsByClassName("page_title")[0].innerHTML = res["NAME"];
         res["RESULTS"].forEach(item => {
             labels.push(new Date(item["DATE"]).toDateString());
             data.push(item["GRADE"]);
@@ -44,4 +44,3 @@ window.onload = () => {
 
 })
 };
-// document.getElementsByClassName("page_title")[0].innerHTML = course_name;
