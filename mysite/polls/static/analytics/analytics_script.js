@@ -24,6 +24,8 @@ window.onload = () => {
             }
         });
 
+        years.sort();
+
         let current_colors = [];
         for (let i =0; i < total_labels.length; i++){
             current_colors.push(main_colors[i%4])
