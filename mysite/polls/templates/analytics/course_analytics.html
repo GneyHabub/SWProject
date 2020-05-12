@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <title id="title">Analytics</title>
+    <link rel="icon" href="{% static 'polls/images/inno_logo.png' %}">
+    <link
+            href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'analytics/course_style.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<header>
+    <div class="green_stripe">
+        <h3><a href="{% url 'polls:personal_page' user.id %}">My account</a></h3>
+        <h3 class="page_title">Courses</h3>
+        <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
+    </div>
+</header>
+<div id="app">
+    <canvas id="chart1"></canvas>
+</div>
+<script src="{% static 'analytics/course_script.js' %}" type="text/javascript"></script>
+</body>
+</html>

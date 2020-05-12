@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8" />
+  <title>Surveys</title>
+  <link
+          href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+          rel="stylesheet"
+  />
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+  <link rel="stylesheet" href="{% static 'surveys_list/surveys_list_styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'surveys_list/surveys_list_styles_mobile.css' %}" />
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</head>
+<body>
+
+<header>
+  <div class="green_stripe">
+    <h3><a href="{% url 'polls:personal_page' user.id %}">My account</a></h3>
+    <h3 class="page_title">Surveys</h3>
+    <h3><a href="{% url 'polls:login_staff' %}" class="logout_link">Log out</a></h3>
+  </div>
+</header>
+<div class="main_body" id="app">
+  <div class="search_field">
+    <form>
+      <div id="first_row">
+        <input type="search" id="search" v-model="filter_query"/>
+        <input type="button" value="Reset" @click="reset_filter"/>
+      </div>
+    </form>
+  </div>
+  <div class="list_wrapper">
+    <survey_info v-for="cd in filtered_course_descriptions" :survey=cd :key="cd.poll_id"></survey_info>
+  </div>
+</div>
+<script src="{% static 'surveys_list/surveys_list_script.js' %}" type="text/javascript"></script>
+</body>
+</html>

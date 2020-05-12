@@ -1,21 +1,26 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Question
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from rest_framework.response import Response
 
 from .forms import CustomUserCreationForm
-from .models import Choice, Question, Poll, CustomUser, Votes, Student
+from .models import Choice, Question, Poll, CustomUser, Votes, Student, Course, Teaches
 
 from django.urls import reverse_lazy
 from .auth import AuthBackend
 from django.contrib.auth import login, logout
 from .forms import StaffLoginForm, StudentLoginForm
+from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from rest_framework.decorators import api_view, renderer_classes
 
+import csv
 
 def custom_logout(request):
     logout(request)
@@ -158,3 +163,201 @@ def vote_poll(request, poll_id):
        # user hits the Back button.
 
        return HttpResponseRedirect(reverse('polls:thank_you_page'))
+
+
+@api_view(('GET',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def course_list(request, prof_id):
+    if request.method == 'GET':
+        user = CustomUser.objects.get(pk=prof_id)
+        if user.is_prof:
+            courses_id = set(Teaches.objects.filter(prof=prof_id).values_list('course', flat=True))
+            courses = list(Course.objects.filter(id__in=courses_id).values_list('title', 'id'))
+        else:
+            courses = list(Course.objects.all().values_list('title', 'id'))
+
+        courses_json = [{'NAME': c[0], 'ID': c[1]} for c in courses]
+    return JsonResponse({"COURSES": courses_json})
+
+
+def course_list_render(request, prof_id):
+    return render(request, 'courses_list/courses_list.html')
+
+
+def surveys_list_render(request, prof_id):
+    return render(request, 'surveys_list/surveys_list.html')
+
+
+def analytics_render(request, prof_id):
+    return render(request, 'analytics/analytics.html')
+
+def single_course(request):
+    return render(request, 'analytics/course_analytics.html')
+
+
+def calculate_answers(lst, value):
+    return sum(list(Choice.objects.filter(question__in=lst).filter(choice_text=value).values_list('votes', flat=True)))
+
+
+def calculate_avg_grade(lst):
+    total_num = 0
+    total_sum = 0
+    for i in range(1,6):
+        s = calculate_answers(lst, str(i))
+        total_num += s
+        total_sum += s*i
+    if total_num > 0:
+        return total_sum/total_num
+    else:
+        return 0
+
+
+def analytics_help(courses, teaches):
+    course_year = list()
+    course_grade = list()
+    teaches_courses = [t[0] for t in teaches]
+
+    for c in courses:
+        indexes = [str(teaches[i][3]) for i, val in enumerate(teaches_courses) if val == c[1]]
+        polls = list(Poll.objects.filter(teachers__in=indexes).filter(is_from_default=True).values_list('id'))
+        questions = list(Question.objects.filter(poll__in=polls).
+                         filter(question_text__in=['Estimate the course - overall',
+                                                   'Estimate the course - labs',
+                                                   'Estimate the course - lectures & tutorials']).values_list('id'))
+
+        av_grade = calculate_avg_grade(questions)
+        course_grade.append({'NAME': c[0], 'AV_GRADE': str(av_grade)})
+        years = sorted(set([teaches[i][1] for i, val in enumerate(teaches_courses) if val == c[1]]))
+        for y in years:
+            year_idxs = [i for i, val in enumerate(teaches) if (val[1] == y and val[0] == c[1])]
+            year_idxs = [teaches[i][3] for i in year_idxs]
+            year_polls = list(Poll.objects.filter(teachers__in=year_idxs).
+                              filter(is_from_default=True).values_list('id'))
+            year_questions = list(Question.objects.filter(poll__in=year_polls).
+                                  filter(question_text__in=['Estimate the course - overall',
+                                                            'Estimate the course - labs',
+                                                            'Estimate the course - lectures & tutorials']).
+                                  values_list('id'))
+            av_grade_y = calculate_avg_grade(year_questions)
+            year_grade = {'NAME': c[0], 'AV_GRADE': str(av_grade_y)}
+            course_year.append({'YEAR': y, 'RES': year_grade})
+
+
+    return {'COURSE_GRADE': course_grade, 'YEAR_GRADE': course_year}
+
+
+@api_view(('GET',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def analytics(request, prof_id):
+    if request.method == 'GET':
+        user = CustomUser.objects.get(pk=prof_id)
+        if user.is_prof:
+            teaches = list(Teaches.objects.filter(prof=prof_id).values_list('course', 'year', 'is_fall', 'id'))
+            teachers_id = [i[3] for i in teaches]
+            courses = set(Course.objects.filter(teaches__in=teachers_id).values_list('title', 'id'))
+            res = analytics_help(courses, teaches)
+            return JsonResponse({'ROLE': 'PROF', 'COURSE_GRADE': res['COURSE_GRADE'], 'YEAR_GRADE': res['YEAR_GRADE']})
+        else:
+            courses = set(Course.objects.all().values_list('title', 'id'))
+            teaches = list(Teaches.objects.all().values_list('course', 'year', 'is_fall', 'id'))
+            res = analytics_help(courses, teaches)
+            return JsonResponse({'ROLE': 'DOE', 'COURSE_GRADE': res['COURSE_GRADE'], 'YEAR_GRADE': res['YEAR_GRADE']})
+
+
+@api_view(('GET',))
+@renderer_classes((TemplateHTMLRenderer, JSONRenderer))
+def surveys_list(request, prof_id):
+    if request.method == 'GET':
+        user = CustomUser.objects.get(pk=prof_id)
+        res = list()
+        if user.is_prof:
+            teaches_query = list(Teaches.objects.filter(prof=prof_id).values_list('id', 'year', 'is_fall'))
+            teaches_id = [i[0] for i in teaches_query]
+            surveys = list(Poll.objects.filter(teachers__in=teaches_id).
+                           values_list('poll_name', 'open_date', 'close_date', 'teachers', 'id'))
+            for s in surveys:
+                teaches_rel = teaches_query[teaches_id.index(s[3])]
+                res.append({'poll_title': s[0], 'year': teaches_rel[1], 'semester': teaches_rel[2],
+                            'open_date': s[1], 'close_date': s[2], 'poll_id':s[4]})
+        else:
+            surveys = list(Poll.objects.values_list('poll_name', 'open_date', 'close_date', 'teachers'))
+            for s in surveys:
+                teaches_rel = list(Teaches.objects.filter(id=s[3]).values_list('id', 'year', 'is_fall'))[0]
+                res.append({'poll_title': s[0], 'year': teaches_rel[1], 'semester': teaches_rel[2],
+                            'open_date': s[1], 'close_date': s[2], 'poll_id':s[4]})
+    return JsonResponse({'SURVEYS': res})
+
+
+def export_poll(request, poll_id):
+    user = request.user
+    if(not user.is_authenticated):
+        response = HttpResponse('you have to log in first')
+    elif(user.is_doe | user.is_prof):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="poll%d.csv"' % int(poll_id)
+        writer = csv.writer(response)
+        writer.writerow(['question text', 'question type'])
+        writer.writerow(['choice(s) text', 'votes'])
+        writer.writerow([])
+        for question in Poll.objects.get(pk=poll_id).question_set.all():
+            writer.writerow([question.question_text, question.type])
+            choices = question.choice_set.all().values_list('choice_text', 'votes')
+            for choice in choices:
+                writer.writerow(choice)
+            writer.writerow([])
+    else:
+        response = HttpResponse("you don't have perisson to export data")    
+    return response
+
+
+def ranking(request, user_id):
+    if request.method == 'GET':
+        profs = list(CustomUser.objects.filter(is_prof=True).values_list('name', 'surname', 'id'))
+        n = -1
+        top = list()
+        for p in profs:
+            teaches_id = list(Teaches.objects.filter(prof=p[2]).values_list('id', flat=True))
+            polls = list(Poll.objects.filter(teachers__in=teaches_id).filter(is_from_default=True).
+                           values_list('id', flat=True))
+            questions = list(Question.objects.filter(poll__in=polls).
+                             filter(question_text__in=['Estimate the course - overall',
+                                                       'Estimate the course - labs',
+                                                       'Estimate the course - lectures & tutorials']).
+                             values_list('id'))
+
+            av_grade = calculate_avg_grade(questions)
+            top.append({'id': p[2], 'grade': av_grade, 'name': p[0]+" "+p[1]})
+        sorted_top = sorted(top, key=lambda k: k['grade'])
+        cleaned_top = list()
+        for i in range(min(10, len(sorted_top))):
+            cleaned_top.append({'name': sorted_top[i]['name']})
+        user = CustomUser.objects.get(pk=user_id)
+        if user.is_prof:
+            n = next((index for (index, d) in enumerate(sorted_top) if d['id'] == int(user_id)), None)+1
+
+    return JsonResponse({'PLACE': n, 'TOP': cleaned_top[:10]})
+
+
+def subject_analytics(request, user_id, course_id):
+    user = request.user
+    res = list()
+    if request.method == 'GET':
+        if user.is_prof:
+            teaches_id = list(Teaches.objects.filter(prof=user.id).filter(course=course_id).values_list('id', flat=True))
+        else:
+            teaches_id = list(Teaches.objects.filter(course=course_id).values_list('id', flat=True))
+        polls = list(Poll.objects.filter(teachers__in=teaches_id).filter(is_from_default=True).
+                     values_list('id', 'close_date'))
+        for p in polls:
+            questions = list(Question.objects.filter(poll=p[0]).
+                             filter(question_text__in=['Estimate the course - overall',
+                                                       'Estimate the course - labs',
+                                                       'Estimate the course - lectures & tutorials']).
+                             values_list('id'))
+            av_grade = calculate_avg_grade(questions)
+            res.append({'DATE': p[1], 'GRADE': av_grade})
+        # top, key = lambda k: k['grade']
+        res = sorted(res, key=lambda k: k['DATE'])
+        subject = list(Course.objects.filter(id=course_id).values_list('title', flat=True))
+        return JsonResponse({'RESULTS': res, 'NAME': subject[0]})
+

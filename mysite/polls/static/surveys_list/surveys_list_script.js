@@ -1,32 +1,43 @@
-Vue.component('course_info', {
+Vue.component('survey_info', {
     template: `
-        <div class="course_info">
-            <a :href="analytics_url">{{course_info.NAME}}</a>
+        <div class="survey_info">
+            <h2 >{{survey.poll_title}}</h2>
+            <a :href="csv_link">
+                <button>Download results in CSV</button>
+            </a>
+            <div class="date_semester_wrapper">
+                <p>{{semester}}</p>
+                <p>{{survey.year}}</p>
+            </div>
         </div>`,
     data() {
         return {
-            analytics_url: {
-                type: String
+            semester: {
+                type: "String"
+            },
+            csv_link: {
+                type: "String"
             }
         }
     },
     props: {
-        course_info:{
+        survey:{
             type: Object,
             required: true
         }
     },
     created() {
-        this.analytics_url = window.location.href.slice(0, -8) + this.course_info["ID"] + "/single_course/"
+        this.semester = this.survey.semester ? 'Fall' : 'Spring';
+        this.csv_link = "/polls/" + this.survey.poll_id + "/poll_export/"
     }
 });
 
 
 new Vue({
     el: "#app",
-    data: function(){ 
+    data: function(){
         return{
-            courses: [],
+            surveys: [],
             profiles: [
                 {
                     name: "Math",
@@ -55,13 +66,13 @@ new Vue({
             ],
             selected_degree: "Degree",
             filter_query: ""
-        } 
+        }
     },
     computed: {
         filtered_course_descriptions() {
-            let res = this.courses;
+            let res = this.surveys;
             let filter = new RegExp(this.filter_query, "i");
-            res = res.filter(course => course["NAME"].match(filter));
+            res = res.filter(survey => survey.poll_title.match(filter));
             return res;
         }
     },
@@ -78,8 +89,8 @@ new Vue({
         fetch(url).then(res => {
             return res.json();
         }).then(res => {
-            console.log(url);
-            this.courses = res["COURSES"];
+            this.surveys = res["SURVEYS"];
+            console.log(res);
         })
     }
 });
