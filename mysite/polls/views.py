@@ -355,5 +355,6 @@ def subject_analytics(request, user_id, course_id):
                              values_list('id'))
             av_grade = calculate_avg_grade(questions)
             res.append({'DATE': p[1], 'GRADE': av_grade})
-        return JsonResponse({'RESULTS': res})
+        subject = list(Course.objects.filter(id=course_id).values_list('title', flat=True))
+        return JsonResponse({'RESULTS': res, 'NAME': subject[0]})
 
