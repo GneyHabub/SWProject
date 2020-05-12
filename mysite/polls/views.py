@@ -227,7 +227,7 @@ def analytics_help(courses, teaches):
 
         av_grade = calculate_avg_grade(questions)
         course_grade.append({'NAME': c[0], 'AV_GRADE': str(av_grade)})
-        years = set([teaches[i][1] for i, val in enumerate(teaches_courses) if val == c[1]])
+        years = sorted(set([teaches[i][1] for i, val in enumerate(teaches_courses) if val == c[1]]))
         for y in years:
             year_idxs = [i for i, val in enumerate(teaches) if (val[1] == y and val[0] == c[1])]
             year_idxs = [teaches[i][3] for i in year_idxs]
@@ -241,6 +241,7 @@ def analytics_help(courses, teaches):
             av_grade_y = calculate_avg_grade(year_questions)
             year_grade = {'NAME': c[0], 'AV_GRADE': str(av_grade_y)}
             course_year.append({'YEAR': y, 'RES': year_grade})
+
 
     return {'COURSE_GRADE': course_grade, 'YEAR_GRADE': course_year}
 
@@ -355,6 +356,8 @@ def subject_analytics(request, user_id, course_id):
                              values_list('id'))
             av_grade = calculate_avg_grade(questions)
             res.append({'DATE': p[1], 'GRADE': av_grade})
+        # top, key = lambda k: k['grade']
+        res = sorted(res, key=lambda k: k['DATE'])
         subject = list(Course.objects.filter(id=course_id).values_list('title', flat=True))
         return JsonResponse({'RESULTS': res, 'NAME': subject[0]})
 
